@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-02-26T11:16:14",
+  "input": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/runs/multi_agent_spatially_aware_image_restoration/.systematic-literature-review/artifacts/papers_raw.jsonl",
+  "output": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/runs/multi_agent_spatially_aware_image_restoration/.systematic-literature-review/artifacts/papers_deduped.jsonl",
+  "input_count": 651,
+  "output_count": 650,
+  "merged_count": 1,
+  "cross_doi_merges": 1,
+  "params": {
+    "title_similarity_threshold": 0.92,
+    "token_jaccard_threshold": 0.8,
+    "year_window": 1
+  },
+  "groups": [
+    {
+      "canonical_index": 506,
+      "canonical": {
+        "title": "Pixel-Aware Stable Diffusion for Realistic Image Super-Resolution and Personalized Stylization",
+        "doi": "10.1007/978-3-031-73247-8_5",
+        "year": 2024,
+        "venue": "Lecture notes in computer science",
+        "url": "",
+        "preprint": false,
+        "heuristic_score": 19
+      },
+      "merged": [
+        {
+          "merged_index": 532,
+          "merged": {
+            "title": "Pixel-Aware Stable Diffusion for Realistic Image Super-resolution and Personalized Stylization",
+            "doi": "10.48550/arxiv.2308.14469",
+            "year": 2023,
+            "venue": "arXiv (Cornell University)",
+            "url": "",
+            "preprint": true,
+            "heuristic_score": 15
+          },
+          "reason": "cross_doi_preprint_to_published",
+          "similarity": 1.0,
+          "jaccard": 1.0
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "canonical_index": 506,
+      "merged_index": 532,
+      "reason": "cross_doi_preprint_to_published",
+      "similarity": 1.0,
+      "jaccard": 1.0,
+      "year_a": 2024,
+      "year_b": 2023,
+      "doi_a": "10.1007/978-3-031-73247-8_5",
+      "doi_b": "10.48550/arxiv.2308.14469"
+    }
+  ]
+}

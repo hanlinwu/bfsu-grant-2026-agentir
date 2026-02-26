@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "*",
+      "Bash(pip3 install python-docx)",
+      "Bash(python3:*)",
+      "Bash(dpkg -l)",
+      "Bash(apt list --installed)",
+      "Bash(sudo apt-get install -y libreoffice-writer)",
+      "Bash(pip3 install docx2pdf)",
+      "Bash(pip3 install unoconv)",
+      "Bash(xelatex -interaction=nonstopmode main.tex)",
+      "Bash(fc-list ':lang=zh')",
+      "Bash(kpsewhich tcolorbox.sty)",
+      "Bash(kpsewhich mdframed.sty)",
+      "Bash(kpsewhich framed.sty)",
+      "Bash(tlmgr list --only-installed)",
+      "Bash(\"/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/main.tex\":*)",
+      "Bash(kpsewhich longtable.sty)",
+      "Bash(test -f \"/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/CLAUDE.md\")",
+      "Bash(sudo apt-get install -y poppler-utils)",
+      "Bash(apt-get install -y poppler-utils)",
+      "Bash(pip install pymupdf)",
+      "Bash(pdftotext \"/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/references/去年项目参考.pdf\" -)",
+      "Bash(biber main)"
+    ]
+  }
+}

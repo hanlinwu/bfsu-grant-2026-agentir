@@ -1,0 +1,14 @@
+{
+  "queries": [
+    {"query": "AgenticIR agentic image restoration", "rationale": "Key paper: AgenticIR framework"},
+    {"query": "RestoreAgent autonomous image restoration multimodal", "rationale": "Key paper: RestoreAgent"},
+    {"query": "MAIR multi-agent image restoration degradation prior", "rationale": "Key paper: MAIR multi-agent"},
+    {"query": "Q-Agent quality-driven agent image restoration greedy", "rationale": "Key paper: Q-Agent"},
+    {"query": "AirNet all-in-one image restoration contrastive learning", "rationale": "Key paper: AirNet"},
+    {"query": "InstructIR instruction-based image restoration natural language", "rationale": "Key paper: InstructIR"},
+    {"query": "SwinIR image restoration Swin Transformer", "rationale": "Key paper: SwinIR"},
+    {"query": "DepictQA depicted image quality assessment language", "rationale": "Key paper: DepictQA"},
+    {"query": "IPR-LLM image processing LLM reasoning chain", "rationale": "LLM-based image processing"},
+    {"query": "visual agent tool use image editing generation", "rationale": "Visual agents with tool use"}
+  ]
+}

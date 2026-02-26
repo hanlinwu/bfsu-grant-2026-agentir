@@ -1,0 +1,64 @@
+{
+  "queries": [
+    {
+      "query": "agent image restoration LLM tool planning",
+      "rationale": "Core query: agent-based image restoration with LLM planning"
+    },
+    {
+      "query": "multi-agent visual task planning large language model",
+      "rationale": "Multi-agent + LLM for visual tasks"
+    },
+    {
+      "query": "all-in-one image restoration unified model degradation",
+      "rationale": "All-in-one / unified image restoration methods"
+    },
+    {
+      "query": "prompt-based image restoration learning degradation",
+      "rationale": "Prompt-guided image restoration (PromptIR, InstructIR)"
+    },
+    {
+      "query": "image restoration transformer architecture efficient",
+      "rationale": "Transformer-based image restoration (SwinIR, Restormer)"
+    },
+    {
+      "query": "image denoising deblurring dehazing deraining deep learning",
+      "rationale": "Classic single-task restoration methods"
+    },
+    {
+      "query": "segment anything model SAM zero-shot segmentation",
+      "rationale": "SAM foundation model for spatial segmentation"
+    },
+    {
+      "query": "visual language model image quality assessment",
+      "rationale": "VLM-based image quality assessment"
+    },
+    {
+      "query": "image quality assessment no-reference blind deep learning",
+      "rationale": "No-reference IQA methods"
+    },
+    {
+      "query": "knowledge distillation model compression image restoration",
+      "rationale": "Knowledge distillation for lightweight restoration"
+    },
+    {
+      "query": "spatially varying degradation image restoration local",
+      "rationale": "Spatial-aware / spatially varying degradation handling"
+    },
+    {
+      "query": "diffusion model image restoration generation",
+      "rationale": "Diffusion-based image restoration"
+    },
+    {
+      "query": "large multimodal model tool use visual reasoning",
+      "rationale": "LMM tool use for visual tasks"
+    },
+    {
+      "query": "image super resolution continuous scale arbitrary",
+      "rationale": "Continuous-scale super-resolution"
+    },
+    {
+      "query": "real world image degradation mixed complex restoration",
+      "rationale": "Real-world complex/mixed degradation restoration"
+    }
+  ]
+}

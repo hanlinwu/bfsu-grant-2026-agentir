@@ -1,0 +1,53 @@
+{
+  "files.exclude": {
+    "**/*.aux": true,
+    "**/*.bbl": true,
+    "**/*.bcf": true,
+    "**/*.blg": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.fls": true,
+    "**/*.lof": true,
+    "**/*.log": true,
+    "**/*.lot": true,
+    "**/*.out": true,
+    "**/*.run.xml": true,
+    "**/*.synctex.gz": true,
+    "**/*.toc": true,
+    "**/_minted*": true,
+    "**/build": true,
+    "**/out": true
+  },
+  "search.exclude": {
+    "**/*.aux": true,
+    "**/*.bbl": true,
+    "**/*.bcf": true,
+    "**/*.blg": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.fls": true,
+    "**/*.lof": true,
+    "**/*.log": true,
+    "**/*.lot": true,
+    "**/*.out": true,
+    "**/*.run.xml": true,
+    "**/*.synctex.gz": true,
+    "**/*.toc": true,
+    "**/_minted*": true,
+    "**/build": true,
+    "**/out": true
+  },
+  "files.watcherExclude": {
+    "**/*.aux": true,
+    "**/*.bbl": true,
+    "**/*.bcf": true,
+    "**/*.blg": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.fls": true,
+    "**/*.log": true,
+    "**/*.out": true,
+    "**/*.run.xml": true,
+    "**/*.synctex.gz": true,
+    "**/_minted*": true,
+    "**/build/**": true,
+    "**/out/**": true
+  }
+}

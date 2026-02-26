@@ -1,0 +1,62 @@
+# LaTeX intermediate and output files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.idv
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.out
+*.nav
+*.snm
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Latexmk and temporary backups
+*.dvi
+*.pdfsync
+*.synctex(busy)
+*.tmp
+*.bak
+*~
+
+# Build directories
+_minted*
+build/
+out/
+
+# Bibliography tool cache
+*.bib.bak
+
+# Latexmk / arara / lualatex temp
+*.acn
+*.acr
+*.alg
+*.loa
+*.lol
+*.maf
+*.mtc*
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python cache (if scripts are used in workflow)
+__pycache__/
+*.pyc
+references/**
