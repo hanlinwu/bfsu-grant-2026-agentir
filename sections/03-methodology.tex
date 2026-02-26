@@ -1,16 +1,16 @@
 \section{思路方法}
 
-本节围绕“如何做成”展开，按照技术流程、实施计划与可行性支撑三层推进，重点回答模型如何训练、如何推理、如何规避风险。
+本节围绕"如何做成"展开，按照技术流程、实施计划与可行性支撑三层推进，重点回答模型如何训练、如何推理、如何规避风险。
 
 \subsection{具体研究方法}
 
-本项目的整体研究思路为"感知$\to$规划$\to$执行$\to$蒸馏"。首先构建空间感知模块实现区域级退化分析，然后设计层级智能体进行协同规划与执行，最后通过轨迹蒸馏实现轻量化部署。三个研究内容层层递进、相互依托。具体方法流程如图2所示。
+本项目的整体研究思路为"感知$\to$规划$\to$执行$\to$蒸馏"。首先构建空间感知模块实现区域级退化分析，然后设计层级智能体进行协同规划与执行，最后通过轨迹蒸馏实现轻量化部署。三个研究内容层层递进、相互依托。具体方法流程如图~\ref{fig:method-pipeline}所示。
 
 % === 图2 占位符 ===
 % 【画图 AI Prompt（详细描述）】:
 % 绘制一张学术论文风格的详细方法流程图，展示"多智能体协同的空间感知图像恢复"的
 % 完整技术流程。白色背景，专业扁平化设计，整体布局为从上到下的三行结构，
-% 分别对应三个研究内容，行与行之间有清晰的数据流箭头连接。
+% 行与行之间有清晰的数据流箭头连接。
 %
 % 【第一行：空间感知退化分析（浅蓝色背景带）】
 %   从左到右排列：
@@ -81,73 +81,211 @@
 %   与图1的三模块颜色保持一致。
 %
 \vspace{6pt}
-\begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics[width=\linewidth]{imgs/Gemini_Generated_Image_qjhpc4qjhpc4qjhp.png}\\[2pt]
-{\small 图2\quad 具体研究方法流程}
-\end{center}
+\caption{具体研究方法流程}
+\label{fig:method-pipeline}
+\end{figure}
 \vspace{6pt}
 
-（1）空间感知退化分析
+\textbf{（1）空间感知退化分析}
 
 给定退化图像$\mathbf{y} \in \mathbb{R}^{H \times W \times 3}$，本模块旨在生成空间退化图$\mathcal{M}$，为后续智能体规划提供结构化输入。
 
-步骤一：利用零样本分割模型SAM\cite{sam}将图像划分为$N$个语义一致的区域：
+\textbf{步骤一：语义区域分割。}利用零样本分割模型SAM\cite{sam}将图像划分为$N$个语义一致的区域：
 \begin{equation}
-  \{R_i\}_{i=1}^{N} = \mathrm{SAM}(\mathbf{y}), \quad \bigcup\nolimits_{i=1}^{N} R_i = \Omega, \quad R_i \cap R_j = \emptyset \ (i \neq j)
+\{R_i\}_{i=1}^{N} = \mathrm{SAM}(\mathbf{y}), \quad \bigcup_{i=1}^{N} R_i = \Omega, \quad R_i \cap R_j = \emptyset \ (i \neq j)
 \end{equation}
-其中$\Omega$为图像像素域。步骤二：对每个区域$R_i$，将其裁剪区域$\mathbf{y}_{R_i}$输入微调的视觉语言模型DepictQA\cite{depictqa}，采用链式思维推理逐类判断退化是否存在及其程度，输出退化类型向量$\mathbf{d}_i \in \{0,1\}^{C}$与对应严重程度向量$\mathbf{s}_i \in [0,1]^{C}$，其中$C$为预定义退化类别总数。步骤三：汇总所有区域分析结果，构建空间退化图$\mathcal{M} = \{(R_i, \mathbf{d}_i, \mathbf{s}_i)\}_{i=1}^{N}$。
-
-输入输出定义：输入为退化图像$\mathbf{y}$；输出为结构化空间退化图$\mathcal{M}$，其可直接作为后续决策模块的状态描述。
-
-（2）层级多智能体协同规划
-
-基于空间退化图$\mathcal{M}$，设计全局调度器与区域专家的两层协同架构。
-
-步骤一：全局调度器依据退化先验（场景退化$\to$成像退化$\to$压缩退化的逆序处理原则\cite{mair}），为各区域分配处理优先级并制定整体修复策略。步骤二：对于区域$R_i$，区域专家从工具库$\mathcal{F} = \{f_1, f_2, \ldots, f_L\}$中选择恢复工具序列$\pi_i = (f_{\sigma_1}, \ldots, f_{\sigma_{K_i}})$，并为每个工具设定连续参数$\boldsymbol{\theta}_i = (\theta_{\sigma_1}, \ldots, \theta_{\sigma_{K_i}})$，区域修复结果为：
+其中$\Omega$为图像像素域。SAM基于超过10亿掩码的预训练，具备良好的零样本泛化能力。然而，直接应用于退化图像时，模糊边界、噪声纹理和对比度损失会导致分割质量下降。为此，本研究引入置信度门控机制：
 \begin{equation}
-  \hat{\mathbf{x}}_{R_i} = (f_{\sigma_{K_i}} \circ \cdots \circ f_{\sigma_1})(\mathbf{y}_{R_i};\, \boldsymbol{\theta}_i)
+R_i^{\text{final}} = \begin{cases} R_i, & \text{if } \mathcal{C}(R_i) > \tau_{\text{seg}} \\ R_i^{\text{robust}}, & \text{otherwise} \end{cases}
 \end{equation}
-步骤三：引入质量评估函数$Q(\cdot)$\cite{depictqa}对修复结果评分，采用贪心策略迭代优化工具参数直至满足质量阈值$\tau$：
+其中$\mathcal{C}(R_i)$为SAM对区域$R_i$的分割置信度，$\tau_{\text{seg}}$为预设阈值。当置信度低于阈值时，启用RobustSAM\cite{robustsam}重新分割，其在噪声、模糊、低对比度等退化条件下保持稳健性能。
+
+\textbf{步骤二：区域级退化分析。}对每个分割区域$R_i$，提取其裁剪图像$\mathbf{y}_{R_i} = \mathbf{y} \odot \mathbf{M}_i$，其中$\mathbf{M}_i \in \{0,1\}^{H \times W}$为区域掩码。将$\mathbf{y}_{R_i}$输入经Q-Instruct数据集微调的视觉语言模型$V_{\theta}$，采用链式思维推理逐类判断退化：
 \begin{equation}
-  (\pi_i^{*}, \boldsymbol{\theta}_i^{*}) = \arg\max_{\pi_i,\, \boldsymbol{\theta}_i} Q(\hat{\mathbf{x}}_{R_i}), \quad \mathrm{s.t.} \quad Q(\hat{\mathbf{x}}_{R_i}) \geq \tau
+\mathbf{d}_i^{(c)}, s_i^{(c)} = V_{\theta}\left(\text{Prompt}_c, \mathbf{y}_{R_i}\right), \quad c = 1, \ldots, C
 \end{equation}
-步骤四：全局调度器通过区域掩码加权融合各区域结果，合成最终恢复图像$\hat{\mathbf{x}} = \sum_{i=1}^{N} R_i \odot \hat{\mathbf{x}}_{R_i}$，并对全图进行整体质量评估与一致性检查。
-
-输入输出定义：输入为空间退化图$\mathcal{M}$与工具库$\mathcal{F}$；输出为区域最优决策$\{(\pi_i^{*}, \boldsymbol{\theta}_i^{*})\}$与恢复图像$\hat{\mathbf{x}}$。
-
-（3）基于轨迹蒸馏的轻量路由网络
-
-利用上述多智能体系统在大规模合成退化数据集上离线运行，收集决策轨迹数据集$\mathcal{T} = \{(\mathbf{y}^{(j)},\, \mathcal{M}^{(j)},\, \{\pi_i^{*,(j)}, \boldsymbol{\theta}_i^{*,(j)}\}_{i})\}_{j=1}^{M}$。基于该数据集训练轻量级路由网络$\Phi_\omega$，使其直接根据退化图像预测区域划分、退化类型及工具调度方案。训练目标为多任务联合损失：
+其中$\text{Prompt}_c$为针对第$c$类退化的查询提示。为提升分析精度，引入空间上下文聚合：
 \begin{equation}
-  \mathcal{L} = \mathcal{L}_{\mathrm{seg}} + \lambda_1 \mathcal{L}_{\mathrm{cls}} + \lambda_2 \mathcal{L}_{\mathrm{route}} + \lambda_3 \mathcal{L}_{\mathrm{param}}
+\mathbf{h}_i = \text{ContextAgg}\left(\{V_{\theta}(\mathbf{y}_{R_j})\}_{j \in \mathcal{N}(i)}\right)
 \end{equation}
-其中$\mathcal{L}_{\mathrm{seg}}$、$\mathcal{L}_{\mathrm{cls}}$、$\mathcal{L}_{\mathrm{route}}$、$\mathcal{L}_{\mathrm{param}}$分别为区域分割、退化分类、工具路由选择与连续参数回归损失，$\lambda_1, \lambda_2, \lambda_3$为平衡系数。部署时仅需轻量路由网络$\Phi_\omega$与恢复工具库，无需依赖LLM/VLM，可实现端侧实时推理。
+其中$\mathcal{N}(i)$表示区域$R_i$的空间邻域集合，通过图注意力机制聚合邻域退化信息，修正孤立区域的误判。
 
-训练与推理区别：训练阶段使用离线轨迹监督并联合优化多任务损失；推理阶段仅执行前向路由预测与工具调用，避免大模型在线推理开销。
+\textbf{步骤三：空间退化图构建。}汇总所有区域分析结果，构建结构化空间退化图：
+\begin{equation}
+\mathcal{M} = \left\{(R_i, \mathbf{d}_i, \mathbf{s}_i, \mathbf{h}_i)\right\}_{i=1}^{N}
+\end{equation}
+该图显式编码了退化的空间分布、类型判别与严重程度估计，可直接作为后续决策模块的状态描述。
 
-风险与回退策略：针对分割误差传播问题，设置区域置信度门控与候选掩码回退；针对规划误差累积问题，引入全局一致性约束与早停机制；针对蒸馏偏差问题，采用高质量轨迹重加权与困难样本再训练。
+\textbf{验证方案：}在SIDD去噪、GoPro去模糊、NH-HAZE去雾等公开基准上，采用分类准确率（Acc）、平均精度（mAP）和F1分数评估退化识别性能。对比方案包括：（1）全图级DepictQA分析基线；（2）SAM分割 + 独立区域分析（无上下文聚合）；（3）本研究完整方法。通过消融实验量化各组件（RobustSAM回退、上下文聚合）对最终恢复质量（PSNR/SSIM）的贡献。
+
+\textbf{（2）层级多智能体协同规划}
+
+基于空间退化图$\mathcal{M}$，本研究设计全局调度器$G_{\phi}$与区域专家$\{E_i\}_{i=1}^{N}$的协同架构。全局调度器负责跨区域策略协调，区域专家负责区域内恢复决策。
+
+\textbf{步骤一：全局调度与优先级分配。}全局调度器依据退化先验（场景退化$\to$成像退化$\to$压缩退化的逆序处理原则\cite{mair}），为各区域分配处理优先级。定义退化优先级函数：
+\begin{equation}
+\mathcal{P}(R_i) = \sum_{c=1}^{C} w_c \cdot d_i^{(c)} \cdot s_i^{(c)}
+\end{equation}
+其中$w_c$为第$c$类退化的先验权重（场景退化$w_c > 1$，成像退化$w_c = 1$，压缩退化$0 < w_c < 1$）。全局调度器按$\mathcal{P}(R_i)$降序排列区域处理顺序，并生成全局策略向量：
+\begin{equation}
+\mathbf{g} = G_{\phi}(\mathcal{M}) = \text{Softmax}\left(\text{MLP}\left(\{\mathbf{h}_i\}_{i=1}^{N}\right)\right)
+\end{equation}
+其中$\mathbf{g} \in \mathbb{R}^{N}$编码各区域的处理优先级权重。
+
+\textbf{步骤二：区域专家工具链选择与参数优化。}对于区域$R_i$，区域专家$E_i$从预构建的工具库$\mathcal{F} = \{f_1, f_2, \ldots, f_L\}$中选择恢复工具序列$\pi_i = (f_{\sigma_1}, \ldots, f_{\sigma_{K_i}})$，并为每个工具设定连续参数$\boldsymbol{\theta}_i = (\theta_{\sigma_1}, \ldots, \theta_{\sigma_{K_i}})$。区域修复结果通过函数复合计算：
+\begin{equation}
+\hat{\mathbf{x}}_{R_i} = (f_{\sigma_{K_i}} \circ \cdots \circ f_{\sigma_1})(\mathbf{y}_{R_i}; \boldsymbol{\theta}_i)
+\end{equation}
+
+工具链选择采用策略梯度方法优化。定义策略网络$\pi_{\psi}(\cdot | \mathbf{h}_i, \mathbf{g})$输出工具选择概率分布，通过最大化期望恢复质量进行训练：
+\begin{equation}
+\max_{\psi} \mathbb{E}_{\pi_i \sim \pi_{\psi}}\left[Q\left((f_{\sigma_{K_i}} \circ \cdots \circ f_{\sigma_1})(\mathbf{y}_{R_i})\right)\right] - \beta \cdot \text{Length}(\pi_i)
+\end{equation}
+其中$Q(\cdot)$为质量评估函数，$\beta$为工具链长度惩罚系数，鼓励简洁高效的处理流程。
+
+\textbf{步骤三：连续参数自适应优化。}对于选定的工具链$\pi_i$，区域专家通过迭代优化确定最优参数：
+\begin{equation}
+\boldsymbol{\theta}_i^{*} = \arg\max_{\boldsymbol{\theta}_i} Q\left(\hat{\mathbf{x}}_{R_i}(\boldsymbol{\theta}_i)\right), \quad \text{s.t.} \quad Q\left(\hat{\mathbf{x}}_{R_i}(\boldsymbol{\theta}_i)\right) \geq \tau
+\end{equation}
+其中$\tau$为质量阈值。采用贝叶斯优化或梯度上升法求解，迭代更新直至收敛或达到最大迭代次数$T_{\max}$。
+
+\textbf{步骤四：全局融合与一致性约束。}全局调度器通过区域掩码加权融合各区域结果：
+\begin{equation}
+\hat{\mathbf{x}} = \sum_{i=1}^{N} \mathbf{M}_i \odot \hat{\mathbf{x}}_{R_i} + \lambda_{\text{smooth}} \cdot \nabla^2 \hat{\mathbf{x}}
+\end{equation}
+其中$\lambda_{\text{smooth}}$为平滑正则系数，通过拉普拉斯算子约束边界一致性。全局质量评估通过一致性损失实现跨区域协调：
+\begin{equation}
+\mathcal{L}_{\text{consist}} = \sum_{(i,j) \in \mathcal{E}} \left\| \hat{\mathbf{x}}_{R_i}^{\text{border}} - \hat{\mathbf{x}}_{R_j}^{\text{border}} \right\|_2^2
+\end{equation}
+其中$\mathcal{E}$为相邻区域边界的像素集合。
+
+\textbf{验证方案：}在混合退化合成数据集（通过SIDD、GoPro、NH-HAZE等组合生成）与真实测试样本上，与AirNet、PromptIR等All-in-One静态方法以及AgenticIR、MAIR等智能体方法进行全面对比。评估指标包括：（1）恢复质量：PSNR、SSIM、LPIPS；（2）推理效率：FPS、平均工具调用次数；（3）决策质量：工具链选择准确率、参数优化收敛速度。通过消融实验验证层级架构各组件（全局调度、区域专家、质量反馈、一致性约束）的贡献度。
+
+\textbf{（3）基于轨迹蒸馏的轻量路由网络}
+
+\textbf{步骤一：决策轨迹数据集构建。}利用上述多智能体系统在大规模合成退化数据集$\mathcal{D}_{\text{syn}} = \{(\mathbf{y}^{(j)}, \mathbf{x}^{(j)})\}_{j=1}^{M}$上离线运行，收集决策轨迹数据集：
+\begin{equation}
+\mathcal{T} = \left\{\left(\mathbf{y}^{(j)}, \mathcal{M}^{(j)}, \left\{\pi_i^{*,(j)}, \boldsymbol{\theta}_i^{*,(j)}, \mathbf{M}_i^{(j)}\right\}_{i=1}^{N_j}\right)\right\}_{j=1}^{M}
+\end{equation}
+其中每条轨迹记录输入图像$\mathbf{y}^{(j)}$、空间退化图$\mathcal{M}^{(j)}$、各区域最优工具序列$\pi_i^{*}$、最优参数$\boldsymbol{\theta}_i^{*}$以及区域掩码$\mathbf{M}_i$。
+
+为提升轨迹质量，引入结果过滤机制：仅保留最终恢复质量$Q(\hat{\mathbf{x}}^{(j)}) \geq \tau_{\text{high}}$的轨迹参与蒸馏。同时，采用轨迹多样性采样确保退化类型、区域数量、工具链长度的分布均衡。
+
+\textbf{步骤二：轻量路由网络架构设计。}设计轻量级路由网络$\Phi_{\omega}$，采用编码器—多任务解码器架构：
+
+编码器采用轻量化骨干网络（如MobileNet-V3或EfficientNet-B0）提取多尺度特征金字塔$\{\mathbf{F}_l\}_{l=1}^{L}$，其中$\mathbf{F}_l \in \mathbb{R}^{H/2^l \times W/2^l \times C_l}$。
+
+解码器分为四个并行分支头：
+
+(a) \textbf{分割头}$\Phi_{\omega}^{\text{seg}}$：输出区域掩码概率图$\hat{\mathbf{P}}^{\text{mask}} \in \mathbb{R}^{H \times W \times N_{\max}}$，通过Softmax获取区域归属概率：
+\begin{equation}
+\hat{\mathbf{M}}_i = \mathbb{1}\left[\arg\max_k \hat{P}^{\text{mask}}(u,v,k) = i\right]
+\end{equation}
+
+(b) \textbf{分类头}$\Phi_{\omega}^{\text{cls}}$：对每个区域输出退化类型概率分布：
+\begin{equation}
+\hat{\mathbf{d}}_i = \text{Sigmoid}\left(\text{GAP}\left(\mathbf{F}_{\text{roi}}^{(i)}\right)\right) \in [0,1]^{C}
+\end{equation}
+其中$\text{GAP}$为全局平均池化，$\mathbf{F}_{\text{roi}}^{(i)}$为区域$R_i$对应的RoI特征。
+
+(c) \textbf{路由头}$\Phi_{\omega}^{\text{route}}$：输出工具选择概率矩阵：
+\begin{equation}
+\hat{\mathbf{P}}^{\text{route}}_i = \text{Softmax}\left(\text{MLP}\left(\mathbf{F}_{\text{roi}}^{(i)} \oplus \hat{\mathbf{d}}_i\right)\right) \in \mathbb{R}^{L}
+\end{equation}
+其中$\oplus$表示特征拼接。
+
+(d) \textbf{参数头}$\Phi_{\omega}^{\text{param}}$：对每个选中工具输出连续参数值：
+\begin{equation}
+\hat{\boldsymbol{\theta}}_i = \text{Sigmoid}\left(\text{MLP}\left(\mathbf{F}_{\text{roi}}^{(i)}\right)\right) \cdot \boldsymbol{\theta}_{\max}
+\end{equation}
+其中$\boldsymbol{\theta}_{\max}$为各参数的最大允许值。
+
+\textbf{步骤三：多任务联合蒸馏训练。}基于轨迹数据集进行监督学习，联合优化四个任务：
+\begin{equation}
+\mathcal{L} = \mathcal{L}_{\text{seg}} + \lambda_1 \mathcal{L}_{\text{cls}} + \lambda_2 \mathcal{L}_{\text{route}} + \lambda_3 \mathcal{L}_{\text{param}} + \lambda_4 \mathcal{L}_{\text{kd}}
+\end{equation}
+
+各损失项定义如下：
+\begin{align}
+\mathcal{L}_{\text{seg}} &= \frac{1}{M} \sum_{j=1}^{M} \sum_{i=1}^{N_j} \text{Dice}\left(\hat{\mathbf{M}}_i^{(j)}, \mathbf{M}_i^{*,(j)}\right) \\
+\mathcal{L}_{\text{cls}} &= \frac{1}{M} \sum_{j=1}^{M} \sum_{i=1}^{N_j} \text{BCE}\left(\hat{\mathbf{d}}_i^{(j)}, \mathbf{d}_i^{*,(j)}\right) \\
+\mathcal{L}_{\text{route}} &= \frac{1}{M} \sum_{j=1}^{M} \sum_{i=1}^{N_j} \sum_{k=1}^{K_i} \text{CE}\left(\hat{\mathbf{P}}^{\text{route}}_{i,k}, f_{\sigma_k}^{*,(j)}\right) \\
+\mathcal{L}_{\text{param}} &= \frac{1}{M} \sum_{j=1}^{M} \sum_{i=1}^{N_j} \sum_{k=1}^{K_i} \left\|\hat{\boldsymbol{\theta}}_{i,k}^{(j)} - \boldsymbol{\theta}_{i,k}^{*,(j)}\right\|_2^2
+\end{align}
+
+其中$\lambda_1, \lambda_2, \lambda_3, \lambda_4$为任务平衡系数。知识蒸馏损失$\mathcal{L}_{\text{kd}}$用于保留多智能体的"软"决策信息：
+\begin{equation}
+\mathcal{L}_{\text{kd}} = \text{KL}\left(\text{Softmax}(\hat{\mathbf{z}} / T) \| \text{Softmax}(\mathbf{z}^{*} / T)\right)
+\end{equation}
+其中$\hat{\mathbf{z}}$和$\mathbf{z}^{*}$分别为路由网络和多智能体的logits输出，$T$为温度系数。
+
+\textbf{步骤四：困难样本再训练与部署优化。}针对蒸馏偏差问题，实施两阶段训练策略：
+
+第一阶段：在全量轨迹数据上训练至收敛。
+
+第二阶段：识别困难样本集$\mathcal{T}_{\text{hard}} = \{(\mathbf{y}^{(j)}, \cdot) \in \mathcal{T} : Q(\hat{\mathbf{x}}^{(j)}) < Q(\mathbf{x}_{\text{agent}}^{(j)}) - \delta\}$，即路由网络与多智能体性能差距超过阈值$\delta$的样本。在该子集上进行困难样本聚焦训练，损失函数加权：
+\begin{equation}
+\mathcal{L}_{\text{hard}} = \sum_{(\mathbf{y}^{(j)}, \cdot) \in \mathcal{T}_{\text{hard}}} w_j \cdot \mathcal{L}^{(j)}, \quad w_j \propto Q(\mathbf{x}_{\text{agent}}^{(j)}) - Q(\hat{\mathbf{x}}^{(j)})
+\end{equation}
+
+部署阶段，轻量路由网络直接根据输入图像预测区域划分、退化类型、工具调度与参数配置，无需LLM/VLM在线推理，实现端到端实时恢复：
+\begin{equation}
+\left\{\hat{\mathbf{M}}_i, \hat{\mathbf{d}}_i, \hat{\pi}_i, \hat{\boldsymbol{\theta}}_i\right\}_{i=1}^{\hat{N}} = \Phi_{\omega}(\mathbf{y})
+\end{equation}
+
+\textbf{验证方案：}在测试集上对比蒸馏后的轻量路由网络与原多智能体系统的性能差距，要求PSNR损失$\leq 5\%$、SSIM损失$\leq 3\%$。测试部署时延（ms/图像）、模型参数量（MB）、计算量（FLOPs），验证在Jetson Nano或同等边缘设备上的实时推理可行性（目标：$\geq 10$ FPS @ 720p）。通过消融实验验证：（1）多任务联合训练 vs 单任务独立训练；（2）困难样本再训练 vs 单阶段训练；（3）知识蒸馏损失 vs 硬标签监督。
+
+\textbf{训练与推理区别：}训练阶段使用离线轨迹监督并联合优化多任务损失；推理阶段仅执行前向路由预测与工具调用，避免大模型在线推理开销。
+
+\textbf{风险与回退策略：}针对分割误差传播问题，设置区域置信度门控与候选掩码回退；针对规划误差累积问题，引入全局一致性约束与早停机制；针对蒸馏偏差问题，采用高质量轨迹重加权与困难样本再训练。
 
 \subsection{研究计划}
 
-研究计划按“阶段目标—里程碑—可交付件—验收标准”组织如下：
+研究计划按"阶段目标—里程碑—可交付件—验收标准"组织如下：
 
-第一阶段（第1--4月）：完成空间感知模块研发。里程碑：完成分割与区域退化识别联调，形成空间退化图生成流程。可交付件：模块代码、评测脚本、阶段实验报告。验收标准：完成区域级退化识别基线对比，关键指标优于全图识别基线。
+\textbf{第一阶段（第1–4月）：空间感知模块研发}
 
-第二阶段（第5--8月）：完成层级多智能体协同规划系统。里程碑：打通全局调度、区域专家、质量反馈闭环。可交付件：智能体系统原型、消融实验结果、阶段论文初稿。验收标准：在混合退化任务上相较静态管线取得质量或效率改进。
+阶段目标：完成空间感知退化分析机制构建，实现区域级退化识别与量化。
 
-第三阶段（第9--12月）：完成轨迹蒸馏与轻量部署。里程碑：构建轨迹数据集并训练轻量路由网络，完成端侧测试。可交付件：蒸馏模型、部署报告、论文与专利材料。验收标准：在主要质量指标可接受损失范围内，显著降低推理时延与算力开销。
+里程碑：完成SAM分割与VLM区域退化识别联调，形成空间退化图生成流程；建立区域级退化识别评测基准。
 
-时间映射关系：研究内容1对应第一阶段，研究内容2对应第二阶段，研究内容3对应第三阶段；各阶段输出将逐步汇聚为最终系统。
+可交付件：空间感知模块代码库、区域级标注与评测脚本、阶段实验报告。
+
+验收标准：在SIDD、GoPro、NH-HAZE等公开基准上完成区域级退化识别基线对比，关键指标（退化类型识别准确率、严重程度估计误差）优于全图级识别基线；空间退化图质量评分达到预设阈值。
+
+\textbf{第二阶段（第5–8月）：层级多智能体协同规划系统研发}
+
+阶段目标：完成层级多智能体协同机制构建，实现区域级恢复规划与连续参数自适应优化。
+
+里程碑：打通全局调度器、区域专家、质量反馈闭环；完成工具链选择与参数优化的一体化决策流程。
+
+可交付件：层级智能体恢复系统原型、消融实验结果、第一篇论文初稿、发明专利交底书。
+
+验收标准：在混合退化任务上相较AirNet、PromptIR等静态管线取得质量（PSNR提升$\geq$0.5dB）或效率（推理时间降低$\geq$20\%）改进；完成与AgenticIR、MAIR等智能体方法的对比分析。
+
+\textbf{第三阶段（第9–12月）：轨迹蒸馏与轻量部署}
+
+阶段目标：完成轨迹蒸馏驱动的轻量路由网络构建，实现高质量恢复策略的快速推理与边缘部署。
+
+里程碑：构建规模不少于10000条的多智能体决策轨迹数据集；完成轻量路由网络训练与端侧部署测试。
+
+可交付件：轻量路由网络模型、部署测试报告、第二篇论文与专利申请材料、可复现实验配置。
+
+验收标准：在主要质量指标（PSNR、SSIM）可接受损失范围（$\leq$5\%）内，部署时延降低$\geq$50\%、算力开销（FLOPs）降低$\geq$60\%；完成边缘设备（如Jetson Nano或同等级嵌入式平台）上的实时推理验证。
+
+时间映射关系：研究内容1对应第一阶段，研究内容2对应第二阶段，研究内容3对应第三阶段；各阶段输出将逐步汇聚为最终系统。阶段间的依赖关系为：第一阶段输出$\mathcal{M}$作为第二阶段输入；第二阶段运行产生轨迹数据作为第三阶段输入。
 
 \subsection{可行性分析}
 
 \textbf{（1）理论可行性}
 
-多智能体协同与大模型规划机制已在复杂任务求解中证明有效\cite{agenticir,restoreagent,mair,qagent}；空间感知分析所依赖的SAM\cite{sam}与DepictQA\cite{depictqa}具备成熟的预训练基础；轨迹蒸馏作为知识压缩手段已在多任务学习中展现稳定性。上述理论基础与本项目“感知—规划—蒸馏”技术路线一致。
+多智能体协同与大模型规划机制已在复杂任务求解中证明有效\cite{agenticir,restoreagent,mair,qagent}；空间感知分析所依赖的SAM\cite{sam}与DepictQA\cite{depictqa}具备成熟的预训练基础；轨迹蒸馏作为知识压缩手段已在多任务学习中展现稳定性。上述理论基础与本项目"感知—规划—蒸馏"技术路线一致。
 
 \textbf{（2）技术可行性}
 
 在团队基础方面，已形成图像恢复与连续比例因子建模研究积累\cite{wu2023tgrs,wu2022cjig,wu2020tgrs}；在平台条件方面，具备预训练模型接入、训练评测与可视化分析环境；在数据条件方面，具备构建合成退化与真实测试样本的能力。针对潜在瓶颈（算力开销、数据噪声、模型稳定性），已预设轻量路由替代、数据清洗与困难样本重训等缓释策略。
 
 综上，本项目在理论与工程两个层面均具备实施条件，可支撑既定目标按计划推进。
-

@@ -22,7 +22,8 @@
       "Bash(apt-get install -y poppler-utils)",
       "Bash(pip install pymupdf)",
       "Bash(pdftotext \"/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/references/去年项目参考.pdf\" -)",
-      "Bash(biber main)"
+      "Bash(biber main)",
+      "Bash(xelatex main.tex)"
     ]
   }
 }

@@ -1,38 +1,43 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+本文件为 Claude Code（claude.ai/code）在本仓库中工作时提供指导说明。
 
-## Project Overview
+## 项目概述
 
-This is a Chinese academic grant proposal (校级科研基金项目申请书) written in LaTeX. The main deliverable is `main.pdf`, compiled from `main.tex`.
+这是一个使用 LaTeX 撰写的中文学术基金申请书。主要交付物为 `main.pdf`，由 `main.tex` 编译生成。
 
-## Build Command
+## 编译命令
 
 ```bash
 xelatex main.tex
 ```
 
-The document requires **XeLaTeX** (not pdflatex) due to Chinese font support via `ctex`. The first line of `main.tex` declares `% !TEX program = xelatex`.
+由于通过 `ctex` 支持中文字体，文档必须使用 **XeLaTeX**（不能使用 pdflatex）。`main.tex` 第一行已声明 `% !TEX program = xelatex`。
 
-## Project Structure
+## 项目结构
 
-- `main.tex` — The grant proposal document. Contains two parts: "项目设计论证" (sections 1–6: 选题依据, 研究内容, 思路方法, 创新之处, 预期成果, 参考文献) and "前期研究基础".
-- `ideas.md` — Research direction brainstorming based on AgenticIR (agent-based image restoration). Contains five research directions to draw from.
-- `references/` — Reference PDFs. All files here are for writing **content** inspiration, except `去年项目参考.pdf` which is specifically for **writing style** reference.
+- `main.tex` — 基金申请书主文档。包含两部分：``项目设计论证''（第 1–6 节：选题依据、研究内容、思路方法、创新之处、预期成果、参考文献）和``前期研究基础''。
+- `ideas.md` — 基于 AgenticIR（基于智能体的图像恢复）的研究方向头脑风暴，包含 5 个可参考的研究方向。
+- `references/` — 参考文献 PDF。该目录下文件主要用于**内容**写作参考，其中 `去年项目参考.pdf` 专门用于**写作风格**参考。
 
-## Writing Rules
+## 写作规则
 
-1. This is a grant proposal — follow the writing style demonstrated in `references/去年项目参考.pdf`.
-2. Academic writing must be rigorous with proper citations.
-3. **All cited references must be verified on Google Scholar as real publications.** If an arXiv paper has been formally published at a journal or conference, cite the formal publication info instead of the arXiv version.
-4. The proposal has a 6000-character limit for Part 1 (项目设计论证) and 1000-character limit for Part 2 (前期研究基础).
-5. Write in Chinese (the document language).
+1. 本项目为基金申请书，写作风格需参照 `references/去年项目参考.pdf`。
+2. 学术写作必须严谨，并提供规范引用。
+3. 使用中文写作（文档语言为中文）。
+4. **严禁使用“元描述”或“路标式”语句**：绝对不要写类似“本节聚焦...”、“本章将讨论...”、“我们将从三个方面论证...”等解释写作意图的句子。
+    - ❌ 错误示例：“本节聚焦‘为什么必须做、现有方法为何不足、本项目价值何在’三个核心问题，形成从问题提出到目标牵引的完整论证链条。”
+    - ❌ 错误示例：“接下来我们将分析现有方法的局限性。”
+5. **禁止主观情绪化词汇**：避免使用“令人震惊的”、“完美的”等非学术形容词，改用“显著的”、“鲁棒的”等精确术语。
 
-## LaTeX Formatting Notes
+## LaTeX 格式说明
 
-- Chinese fonts: SimSun (body), SimHei (headings/bold), KaiTi (italic), FangSong (monospace); English font: Times New Roman.
-- Body text: 五号 (10.5pt) with 20pt line spacing. Section headings: 小四 (12pt). Part titles: 四号 (14pt).
-- Paragraph indent is set to 2em within content sections. Page margins match the official template (left 2.86cm, right 3.17cm, top/bottom 2.54cm).
-- Content is written inside `longtable` environments to match the official form layout.
-- References should use .bib file and manage automatically. All citations must use superscript format (use `\supercite{}` or configure biblatex with `autocite=superscript`).
-- In LaTeX, use `` for left double quotation marks and '' for right double quotation marks; use ` for left single quotation marks and ' for right single quotation marks.
+- 中文字体：宋体（正文）、黑体（标题/加粗）、楷体（斜体）、仿宋（等宽）；英文字体：Times New Roman。
+- 正文：五号（10.5pt），行距 20pt；一级标题：小四（12pt）；分部标题：四号（14pt）。
+- 内容区段内段首缩进为 2em；页边距与官方模板一致（左 2.86cm，右 3.17cm，上/下 2.54cm）。
+- 内容需写在 `longtable` 环境中，以匹配官方表单版式。
+- 参考文献应使用 `.bib` 文件并自动管理；所有引文必须采用上标格式（使用 `\supercite{}`，或将 biblatex 配置为 `autocite=superscript`）。
+- **强制使用中文引号字符**：在 XeLaTeX + ctex 环境下，必须直接输入 Unicode 中文引号字符（“ ”和‘ ’），以确保编译后生成正确的中文弯引号。
+    - ✅ 正确：直接输入中文引号字符 `“感知→规划→执行→蒸馏”`
+    - ❌ 错误：使用 LaTeX 英文引号语法 ` ``感知→规划→执行→蒸馏’’ `（生成英文引号，高度较矮）
+    - ❌ 错误：使用 ASCII 直引号 `"感知..."`
