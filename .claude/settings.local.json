@@ -56,7 +56,12 @@
       "Bash(apt-cache search \"noto.*cjk\")",
       "Bash(/tmp/nsfc_roadmap_work/config_local.yaml:*)",
       "Bash(sudo apt-get update)",
-      "Bash(sudo apt-get install -y fonts-noto-cjk)"
+      "Bash(sudo apt-get install -y fonts-noto-cjk)",
+      "Bash(git remote add origin https://github.com/hanlinwu/bfsu-grant-2026-agentir.git)",
+      "Bash(git commit:*)",
+      "Bash(git push -u origin master)",
+      "Bash(git remote set-url origin git@github.com:hanlinwu/bfsu-grant-2026-agentir.git)",
+      "Bash(git add -A)"
     ]
   }
 }
