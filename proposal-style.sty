@@ -1,0 +1,132 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{proposal-style}[2026/02/27 Proposal style and fixed instructions]
+
+% ===== 中文与字体 =====
+\RequirePackage[UTF8, fontset=none]{ctex}
+\xeCJKsetup{PunctStyle=quanjiao,RubberPunctSkip=true}
+\setCJKmainfont[BoldFont=SimHei, ItalicFont=KaiTi]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+\setmainfont{Times New Roman}
+
+% ===== 页面与常用宏包 =====
+\RequirePackage[
+  a4paper,
+  left=2.86cm,
+  right=3.17cm,
+  top=2.54cm,
+  bottom=2.54cm
+]{geometry}
+\RequirePackage{mdframed}
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{xcolor}
+\RequirePackage{titlesec}
+
+% ===== 默认字号与段落设置 =====
+\renewcommand{\normalsize}{\fontsize{10.5pt}{14pt}\selectfont}
+\normalsize
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{empty}
+
+% ===== 标题样式 =====
+\titleformat{\section}[block]
+  {\fontsize{12pt}{20pt}\selectfont\sffamily}
+  {\thesection.~}
+  {0pt}
+  {}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+\renewcommand{\thesection}{\arabic{section}}
+
+\titleformat{\subsection}[block]
+  {\fontsize{10.5pt}{20pt}\selectfont\sffamily}
+  {\thesubsection.~}
+  {0pt}
+  {}
+\titlespacing*{\subsection}{0pt}{4pt}{2pt}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+% ===== 可分页边框环境 =====
+\newmdenv[
+  skipabove=0pt,
+  skipbelow=0pt,
+  everyline=true,
+  innerleftmargin=5pt,
+  innerrightmargin=5pt,
+  innertopmargin=5pt,
+  innerbottommargin=5pt,
+  linewidth=0.4pt,
+  middlelinewidth=0.4pt,
+  linecolor=black,
+  middlelinecolor=black,
+  backgroundcolor=white,
+  roundcorner=0pt
+]{proposalbox}
+
+\newmdenv[
+  skipabove=0pt,
+  skipbelow=0pt,
+  everyline=true,
+  innerleftmargin=5pt,
+  innerrightmargin=5pt,
+  innertopmargin=5pt,
+  innerbottommargin=5pt,
+  linewidth=0.75pt,
+  middlelinewidth=0.75pt,
+  linecolor=black,
+  middlelinecolor=black,
+  backgroundcolor=white,
+  roundcorner=0pt
+]{proposalboxthick}
+
+% ===== 固定标题与说明文字 =====
+\newcommand{\DesignArgumentTitle}{%
+  \noindent{\fontsize{14pt}{28pt}\selectfont\sffamily 三、项目设计论证\par}%
+  \vspace{1em}%
+  \nointerlineskip
+}
+
+\newcommand{\DesignArgumentGuide}{%
+  {\fontsize{10.5pt}{10.5pt}\selectfont\bfseries
+  本表参照以下提纲撰写，要求逻辑清晰，主题突出，层次分明，内容翔实，排版清晰，6000字以内。\par}%
+  \vspace{4pt}%
+  {\fontsize{10.5pt}{12.5pt}\selectfont
+  \hspace*{0.59cm}1．[\textbf{选题依据}]\hspace{0.5em}国内外相关研究的学术史梳理及研究动态；本课题相对于已有研究的独到学术价值和应用价值等。%
+  \par
+  \hspace*{0.59cm}2．[\textbf{研究内容}]\hspace{0.5em}本课题的研究对象、总体框架、重点难点、主要目标等。%
+  \par
+  \hspace*{0.59cm}3．[\textbf{思路方法}]\hspace{0.5em}本课题研究的基本思路、具体研究方法、研究计划及其可行性等。%
+  \par
+  \hspace*{0.59cm}4．[\textbf{创新之处}]\hspace{0.5em}在学术思想、学术观点、研究方法等方面的特色和创新。%
+  \par
+  \hspace*{0.59cm}5．[\textbf{预期成果}]\hspace{0.5em}成果形式、使用去向及预期社会效益等。%
+  \par
+  \hspace*{0.59cm}6．[\textbf{参考文献}]\hspace{0.5em}开展本课题研究的主要中外参考文献。%
+  \par\vspace{6pt}%
+  }%
+}
+
+\newcommand{\ResearchBasisTitle}{%
+  \noindent{\fontsize{14pt}{14pt}\selectfont\sffamily 四、前期研究基础\par}%
+  \vspace{1em}%
+  \nointerlineskip\vspace{4pt}%
+}
+
+\newcommand{\ResearchBasisGuide}{%
+  {\fontsize{10.5pt}{15pt}\selectfont\bfseries
+  本表参照以下提纲撰写，1000字以内。\par}%
+  \vspace{4pt}%
+  {\fontsize{10.5pt}{15pt}\selectfont
+  1.~课题组近五年来已有的相关研究成果（负责人和参加者分开填写）。%
+  \par
+  2.~课题负责人近五年来曾完成哪些重要研究课题，科研成果的社会评价（引用、转载、获奖及被采纳情况）。%
+  \par
+  3.~为本课题研究已作的前期准备工作（已收集的数据，进行的调查研究等）。%
+  \par
+  4.~本课题与已立项项目、博士论文（博士后出站报告）的联系与区别。%
+  \par\vspace{6pt}%
+  }%
+}
