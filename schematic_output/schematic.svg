@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1326" height="1717" viewBox="0 0 1326 1717">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgb(47,85,151)"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1326" height="1717" fill="rgb(255,255,255)"/>
+  <text x="105" y="52" font-size="34" fill="rgb(31,31,31)" text-anchor="start">
+    <tspan>多智能体协同的空间感知图像恢复框架</tspan>
+  </text>
+  <rect x="105" y="187" width="680" height="260" rx="22" ry="22" fill="rgb(250,250,250)" stroke="rgb(204,204,204)" stroke-width="2"/>
+  <text x="119" y="219" font-size="22" fill="rgb(31,31,31)" text-anchor="start">
+    <tspan>输入</tspan>
+  </text>
+  <rect x="105" y="527" width="1116" height="260" rx="22" ry="22" fill="rgb(250,250,250)" stroke="rgb(204,204,204)" stroke-width="2"/>
+  <text x="119" y="559" font-size="22" fill="rgb(31,31,31)" text-anchor="start">
+    <tspan>空间感知模块</tspan>
+  </text>
+  <rect x="105" y="867" width="996" height="383" rx="22" ry="22" fill="rgb(250,250,250)" stroke="rgb(204,204,204)" stroke-width="2"/>
+  <text x="119" y="899" font-size="22" fill="rgb(31,31,31)" text-anchor="start">
+    <tspan>层级规划模块</tspan>
+  </text>
+  <rect x="105" y="1217" width="996" height="383" rx="22" ry="22" fill="rgb(250,250,250)" stroke="rgb(204,204,204)" stroke-width="2"/>
+  <text x="119" y="1249" font-size="22" fill="rgb(31,31,31)" text-anchor="start">
+    <tspan>轻量部署模块 (轨迹蒸馏)</tspan>
+  </text>
+  <rect x="105" y="1340" width="680" height="260" rx="22" ry="22" fill="rgb(250,250,250)" stroke="rgb(204,204,204)" stroke-width="2"/>
+  <text x="119" y="1372" font-size="22" fill="rgb(31,31,31)" text-anchor="start">
+    <tspan>输出</tspan>
+  </text>
+  <polyline points="445,419 445,515 301,515 301,611" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="301,759 301,685 663,685 663,611" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="663,759 663,685 1025,685 1025,611" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="1025,759 1025,855 281,855 281,951" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="281,1071 281,1011 603,1011 603,951" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="603,1071 603,1011 925,1011 925,951" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="8 4"/>
+  <text x="764" y="1005" font-size="22" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>工具选择</tspan>
+  </text>
+  <polyline points="603,1071 603,1086 281,1086 281,1102" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="925,1071 925,1086 281,1086 281,1102" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="8 4"/>
+  <text x="603" y="1080" font-size="22" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>执行</tspan>
+  </text>
+  <polyline points="281,1222 281,1162 603,1162 603,1102" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="281,1222 281,1086 603,1086 603,951" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="8 4"/>
+  <text x="442" y="1080" font-size="22" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>反馈</tspan>
+  </text>
+  <polyline points="603,1222 603,1283 445,1283 445,1424" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="524" y="1317" font-size="22" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>训练</tspan>
+  </text>
+  <polyline points="1025,759 1025,1030 281,1030 281,1301" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="8 4"/>
+  <text x="653" y="1024" font-size="22" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>离线数据</tspan>
+  </text>
+  <polyline points="281,1222 281,1261 281,1261 281,1301" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="8 4"/>
+  <text x="281" y="1255" font-size="22" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>决策轨迹</tspan>
+  </text>
+  <polyline points="281,1421 281,1361 603,1361 603,1301" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="603,1421 603,1361 925,1361 925,1301" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="925,1421 925,1436 281,1436 281,1452" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)"/>
+  <polyline points="281,1572 281,1498 445,1498 445,1424" fill="none" stroke="rgb(47,85,151)" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="8 4"/>
+  <text x="363" y="1492" font-size="22" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>推理</tspan>
+  </text>
+  <rect x="141" y="271" width="608" height="148" rx="18" ry="18" fill="rgb(217,232,255)" stroke="rgb(47,85,151)" stroke-width="2"/>
+  <text x="445" y="343" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>退化图像 y</tspan>
+    <tspan x="445" dy="30">(含噪声/模糊/雾霾/雨线)</tspan>
+  </text>
+  <rect x="141" y="611" width="320" height="148" rx="18" ry="18" fill="rgb(218,242,208)" stroke="rgb(46,125,50)" stroke-width="2"/>
+  <text x="301" y="683" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>SAM/RobustSAM</tspan>
+    <tspan x="301" dy="30">语义区域分割</tspan>
+  </text>
+  <rect x="503" y="611" width="320" height="148" rx="18" ry="18" fill="rgb(218,242,208)" stroke="rgb(46,125,50)" stroke-width="2"/>
+  <text x="663" y="683" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>VLM退化分析</tspan>
+    <tspan x="663" dy="30">(DepictQA/Q-Instruct)</tspan>
+  </text>
+  <rect x="865" y="611" width="320" height="148" rx="18" ry="18" fill="rgb(232,223,242)" stroke="rgb(106,76,147)" stroke-width="2"/>
+  <text x="1025" y="683" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>空间退化图 M</tspan>
+    <tspan x="1025" dy="30">{(R_i, d_i, s_i)}</tspan>
+  </text>
+  <rect x="141" y="951" width="280" height="120" rx="18" ry="18" fill="rgb(232,223,242)" stroke="rgb(106,76,147)" stroke-width="2"/>
+  <text x="281" y="1009" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>全局调度器 (LLM)</tspan>
+    <tspan x="281" dy="30">退化先验排序策略</tspan>
+  </text>
+  <rect x="463" y="951" width="280" height="120" rx="18" ry="18" fill="rgb(232,223,242)" stroke="rgb(106,76,147)" stroke-width="2"/>
+  <text x="603" y="1009" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>区域专家</tspan>
+    <tspan x="603" dy="30">(多智能体协同)</tspan>
+  </text>
+  <rect x="785" y="951" width="280" height="120" rx="18" ry="18" fill="rgb(218,242,208)" stroke="rgb(46,125,50)" stroke-width="2"/>
+  <text x="925" y="1009" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>工具库</tspan>
+    <tspan x="925" dy="30">(去噪/去模糊/去雾/去雨/SR)</tspan>
+  </text>
+  <rect x="141" y="1102" width="280" height="120" rx="18" ry="18" fill="rgb(232,223,242)" stroke="rgb(106,76,147)" stroke-width="2"/>
+  <text x="281" y="1160" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>区域恢复 + 质量反馈</tspan>
+    <tspan x="281" dy="30">(迭代优化)</tspan>
+  </text>
+  <rect x="463" y="1102" width="280" height="120" rx="18" ry="18" fill="rgb(218,242,208)" stroke="rgb(46,125,50)" stroke-width="2"/>
+  <text x="603" y="1175" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>掩码融合</tspan>
+  </text>
+  <rect x="141" y="1301" width="280" height="120" rx="18" ry="18" fill="rgb(218,242,208)" stroke="rgb(46,125,50)" stroke-width="2"/>
+  <text x="281" y="1374" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>轨迹收集 (离线)</tspan>
+  </text>
+  <rect x="463" y="1301" width="280" height="120" rx="18" ry="18" fill="rgb(232,223,242)" stroke="rgb(106,76,147)" stroke-width="2"/>
+  <text x="603" y="1374" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>轨迹蒸馏</tspan>
+  </text>
+  <rect x="785" y="1301" width="280" height="120" rx="18" ry="18" fill="rgb(232,223,242)" stroke="rgb(106,76,147)" stroke-width="2"/>
+  <text x="925" y="1374" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>轻量路由网络 Φ_ω</tspan>
+  </text>
+  <rect x="141" y="1452" width="280" height="120" rx="18" ry="18" fill="rgb(218,242,208)" stroke="rgb(46,125,50)" stroke-width="2"/>
+  <text x="281" y="1510" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>四分支输出</tspan>
+    <tspan x="281" dy="30">(掩码/类型/工具/参数)</tspan>
+  </text>
+  <rect x="141" y="1424" width="608" height="148" rx="18" ry="18" fill="rgb(217,232,255)" stroke="rgb(47,85,151)" stroke-width="2"/>
+  <text x="445" y="1511" font-size="26" fill="rgb(31,31,31)" text-anchor="middle">
+    <tspan>恢复图像 x̂</tspan>
+  </text>
+</svg>

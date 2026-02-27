@@ -1,0 +1,39 @@
+{
+  "run_id": "v20260227105658",
+  "validation_status": "completed",
+  "checks": {
+    "report_structure": {
+      "status": "pass",
+      "required_sections": [
+        "执行摘要",
+        "范围与只读声明",
+        "硬性问题（P0）",
+        "重要建议（P1）",
+        "可选优化（P2）",
+        "引用核查清单",
+        "篇幅与结构分布",
+        "建议的最小修改路线图",
+        "附录：复现信息"
+      ],
+      "present": 9
+    },
+    "deliverables": {
+      "nsfc-qc_report.md": "present",
+      "nsfc-qc_metrics.json": "present",
+      "nsfc-qc_findings.json": "present",
+      "validation.json": "present"
+    },
+    "read_only_compliance": {
+      "status": "pass",
+      "modified_tex_files": 0,
+      "modified_bib_files": 0
+    }
+  },
+  "summary": {
+    "p0_findings": 4,
+    "p1_findings": 12,
+    "p2_findings": 15,
+    "total_findings": 31,
+    "threads_completed": 5
+  }
+}

@@ -1,0 +1,206 @@
+<mxfile host="app.diagrams.net" modified="auto" agent="nsfc-schematic">
+  <diagram name="schematic" id="schematic">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1326" pageHeight="1717" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title_cell" value="多智能体协同的空间感知图像恢复框架" style="text;html=1;whiteSpace=wrap;rounded=0;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=34;fontStyle=1;fontColor=#1F1F1F;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1326" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="group_input_group" value="输入" style="swimlane;rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;childLayout=none;startSize=56;fillColor=#FAFAFA;swimlaneFillColor=#FAFAFA;strokeColor=#CCCCCC;fontColor=#1F1F1F;fontSize=22;fontStyle=1;strokeWidth=2;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=8;spacingBottom=8;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="105" y="187" width="680" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="group_perception_group" value="空间感知模块" style="swimlane;rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;childLayout=none;startSize=56;fillColor=#FAFAFA;swimlaneFillColor=#FAFAFA;strokeColor=#CCCCCC;fontColor=#1F1F1F;fontSize=22;fontStyle=1;strokeWidth=2;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=8;spacingBottom=8;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="105" y="527" width="1116" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="group_planning_group" value="层级规划模块" style="swimlane;rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;childLayout=none;startSize=56;fillColor=#FAFAFA;swimlaneFillColor=#FAFAFA;strokeColor=#CCCCCC;fontColor=#1F1F1F;fontSize=22;fontStyle=1;strokeWidth=2;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=8;spacingBottom=8;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="105" y="867" width="996" height="383" as="geometry"/>
+        </mxCell>
+        <mxCell id="group_deployment_group" value="轻量部署模块 (轨迹蒸馏)" style="swimlane;rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;childLayout=none;startSize=56;fillColor=#FAFAFA;swimlaneFillColor=#FAFAFA;strokeColor=#CCCCCC;fontColor=#1F1F1F;fontSize=22;fontStyle=1;strokeWidth=2;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=8;spacingBottom=8;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="105" y="1217" width="996" height="383" as="geometry"/>
+        </mxCell>
+        <mxCell id="group_output_group" value="输出" style="swimlane;rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;childLayout=none;startSize=56;fillColor=#FAFAFA;swimlaneFillColor=#FAFAFA;strokeColor=#CCCCCC;fontColor=#1F1F1F;fontSize=22;fontStyle=1;strokeWidth=2;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=8;spacingBottom=8;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="105" y="1340" width="680" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="degraded_img" target="sam_seg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="445" y="515"/>
+              <mxPoint x="301" y="515"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="sam_seg" target="vlm_analysis">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="301" y="685"/>
+              <mxPoint x="663" y="685"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="vlm_analysis" target="degradation_map">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="663" y="685"/>
+              <mxPoint x="1025" y="685"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="degradation_map" target="global_scheduler">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1025" y="855"/>
+              <mxPoint x="281" y="855"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="global_scheduler" target="region_experts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="281" y="1011"/>
+              <mxPoint x="603" y="1011"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_6" value="工具选择" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=1;dashPattern=8 4;endArrow=open;endFill=0;" edge="1" parent="1" source="region_experts" target="tool_library">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="603" y="1011"/>
+              <mxPoint x="925" y="1011"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="region_experts" target="region_restore">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="603" y="1086"/>
+              <mxPoint x="281" y="1086"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_8" value="执行" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=1;dashPattern=8 4;endArrow=open;endFill=0;" edge="1" parent="1" source="tool_library" target="region_restore">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="1086"/>
+              <mxPoint x="281" y="1086"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="region_restore" target="mask_fusion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="281" y="1162"/>
+              <mxPoint x="603" y="1162"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_10" value="反馈" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=1;dashPattern=8 4;endArrow=open;endFill=0;" edge="1" parent="1" source="region_restore" target="region_experts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="281" y="1086"/>
+              <mxPoint x="603" y="1086"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_11" value="训练" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="mask_fusion" target="restored_img">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="603" y="1323"/>
+              <mxPoint x="445" y="1323"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_12" value="离线数据" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=1;dashPattern=8 4;endArrow=open;endFill=0;" edge="1" parent="1" source="degradation_map" target="trajectory_collect">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1025" y="1030"/>
+              <mxPoint x="281" y="1030"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_13" value="决策轨迹" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=1;dashPattern=8 4;endArrow=open;endFill=0;" edge="1" parent="1" source="region_restore" target="trajectory_collect">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="281" y="1261"/>
+              <mxPoint x="281" y="1261"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="trajectory_collect" target="distillation">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="281" y="1361"/>
+              <mxPoint x="603" y="1361"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="distillation" target="routing_network">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="603" y="1361"/>
+              <mxPoint x="925" y="1361"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=0;endArrow=block;endFill=1;" edge="1" parent="1" source="routing_network" target="four_heads">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="925" y="1436"/>
+              <mxPoint x="281" y="1436"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_17" value="推理" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#2F5597;fontSize=22;fontColor=#1F1F1F;fontStyle=0;labelBackgroundColor=#FFFFFF;labelBorderColor=none;labelPadding=4;strokeWidth=2;dashed=1;dashPattern=8 4;endArrow=open;endFill=0;" edge="1" parent="1" source="four_heads" target="restored_img">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="281" y="1498"/>
+              <mxPoint x="445" y="1498"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="degraded_img" value="退化图像 y&lt;br&gt;(含噪声/模糊/雾霾/雨线)" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#D9E8FF;strokeColor=#2F5597;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_input_group">
+          <mxGeometry x="36" y="84" width="608" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="sam_seg" value="SAM/RobustSAM&lt;br&gt;语义区域分割" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#DAF2D0;strokeColor=#2E7D32;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_perception_group">
+          <mxGeometry x="36" y="84" width="320" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="vlm_analysis" value="VLM退化分析&lt;br&gt;(DepictQA/Q-Instruct)" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#DAF2D0;strokeColor=#2E7D32;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_perception_group">
+          <mxGeometry x="398" y="84" width="320" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="degradation_map" value="空间退化图 M&lt;br&gt;{(R_i, d_i, s_i)}" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#E8DFF2;strokeColor=#6A4C93;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_perception_group">
+          <mxGeometry x="760" y="84" width="320" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="global_scheduler" value="全局调度器 (LLM)&lt;br&gt;退化先验排序策略" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#E8DFF2;strokeColor=#6A4C93;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_planning_group">
+          <mxGeometry x="36" y="84" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="region_experts" value="区域专家&lt;br&gt;(多智能体协同)" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#E8DFF2;strokeColor=#6A4C93;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_planning_group">
+          <mxGeometry x="358" y="84" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="tool_library" value="工具库&lt;br&gt;(去噪/去模糊/去雾/去雨/SR)" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#DAF2D0;strokeColor=#2E7D32;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_planning_group">
+          <mxGeometry x="680" y="84" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="region_restore" value="区域恢复 + 质量反馈&lt;br&gt;(迭代优化)" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#E8DFF2;strokeColor=#6A4C93;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_planning_group">
+          <mxGeometry x="36" y="235" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="mask_fusion" value="掩码融合" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#DAF2D0;strokeColor=#2E7D32;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_planning_group">
+          <mxGeometry x="358" y="235" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="trajectory_collect" value="轨迹收集 (离线)" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#DAF2D0;strokeColor=#2E7D32;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_deployment_group">
+          <mxGeometry x="36" y="84" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="distillation" value="轨迹蒸馏" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#E8DFF2;strokeColor=#6A4C93;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_deployment_group">
+          <mxGeometry x="358" y="84" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="routing_network" value="轻量路由网络 Φ_ω" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#E8DFF2;strokeColor=#6A4C93;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_deployment_group">
+          <mxGeometry x="680" y="84" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="four_heads" value="四分支输出&lt;br&gt;(掩码/类型/工具/参数)" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#DAF2D0;strokeColor=#2E7D32;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_deployment_group">
+          <mxGeometry x="36" y="235" width="280" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="restored_img" value="恢复图像 x̂" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#D9E8FF;strokeColor=#2F5597;fontColor=#1F1F1F;fontSize=26;strokeWidth=2;align=center;verticalAlign=middle;spacing=10;spacingLeft=14;spacingRight=14;spacingTop=10;spacingBottom=10;" vertex="1" parent="group_output_group">
+          <mxGeometry x="36" y="84" width="608" height="148" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

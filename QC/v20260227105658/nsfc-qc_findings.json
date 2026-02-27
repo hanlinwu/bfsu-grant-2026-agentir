@@ -1,0 +1,257 @@
+{
+  "run_id": "v20260227105658",
+  "timestamp": "2026-02-27T10:56:58",
+  "findings": [
+    {
+      "id": "P0-001",
+      "severity": "P0",
+      "category": "文风/元描述",
+      "location": "sections/01-topic-basis.tex:114",
+      "evidence": "本节小结：通过上述选题依据与价值分析，可进一步明确本项目需在...",
+      "description": "典型的路标式小结语句，违反 CLAUDE.md 严禁元描述的规定",
+      "recommendation": "直接删除整句",
+      "status": "open"
+    },
+    {
+      "id": "P0-002",
+      "severity": "P0",
+      "category": "篇幅/项目设计论证",
+      "location": "整体",
+      "evidence": "实际约 11683 字，要求 6000 字以内",
+      "description": "项目设计论证总字数超标 94.7%",
+      "recommendation": "压缩至 6000 字以内，重点压缩选题依据",
+      "status": "open"
+    },
+    {
+      "id": "P0-003",
+      "severity": "P0",
+      "category": "篇幅/选题依据",
+      "location": "sections/01-topic-basis.tex",
+      "evidence": "6847 字，标准预算 1800-2100 字",
+      "description": "选题依据章节严重超标 226%",
+      "recommendation": "国内外现状从 5 个子节压缩至 2-3 个",
+      "status": "open"
+    },
+    {
+      "id": "P0-004",
+      "severity": "P0",
+      "category": "篇幅/前期研究基础",
+      "location": "sections/07-10.tex",
+      "evidence": "约 1974 字，要求 1000 字以内",
+      "description": "前期研究基础超标 97.4%",
+      "recommendation": "压缩至 1000 字以内",
+      "status": "open"
+    },
+    {
+      "id": "P1-001",
+      "severity": "P1",
+      "category": "术语/缩略语展开",
+      "location": "sections/01-topic-basis.tex:62",
+      "evidence": "视觉语言模型（VLM）",
+      "description": "VLM 首次使用未给出英文全称",
+      "recommendation": "改为"视觉语言模型（Visual Language Model, VLM）"",
+      "status": "open"
+    },
+    {
+      "id": "P1-002",
+      "severity": "P1",
+      "category": "术语/缩略语展开",
+      "location": "sections/01-topic-basis.tex:62",
+      "evidence": "大语言模型（LLM）",
+      "description": "LLM 首次使用未给出英文全称",
+      "recommendation": "改为"大语言模型（Large Language Model, LLM）"",
+      "status": "open"
+    },
+    {
+      "id": "P1-003",
+      "severity": "P1",
+      "category": "术语/缩略语展开",
+      "location": "sections/01-topic-basis.tex:9",
+      "evidence": "代表性模型的PSNR较单一退化场景下降",
+      "description": "PSNR 首次使用未展开",
+      "recommendation": "改为"峰值信噪比（Peak Signal-to-Noise Ratio, PSNR）"",
+      "status": "open"
+    },
+    {
+      "id": "P1-004",
+      "severity": "P1",
+      "category": "文风/冗长句子",
+      "location": "sections/01-topic-basis.tex:11",
+      "evidence": "该框架的核心思想是将恢复过程从传统的...",
+      "description": "单句长达 167 字，包含 4 层内容",
+      "recommendation": "拆分为 2-3 个短句",
+      "status": "open"
+    },
+    {
+      "id": "P1-005",
+      "severity": "P1",
+      "category": "文风/冗长句子",
+      "location": "sections/01-topic-basis.tex:38",
+      "evidence": "Wu等人指出SwinIR的固定网格窗口划分存在内在局限...",
+      "description": "单句 149 字，包含问题描述+解决方案+关联性说明",
+      "recommendation": "拆分为 2 个短句",
+      "status": "open"
+    },
+    {
+      "id": "P1-006",
+      "severity": "P1",
+      "category": "逻辑/歧义表述",
+      "location": "sections/02-goals-framework-challenges.tex:91",
+      "evidence": "场景退化→成像退化→压缩退化的逆序处理原则",
+      "description": ""逆序"一词位置歧义，不明确是顺序本身为逆序，还是应按逆序处理",
+      "recommendation": "改为"场景退化优先、成像退化次之、压缩退化最后的处理优先级"",
+      "status": "open"
+    },
+    {
+      "id": "P1-007",
+      "severity": "P1",
+      "category": "引用/元信息疑点",
+      "location": "refs.bib:40-45",
+      "evidence": "agenticir 标注为 ICLR 2025",
+      "description": "需核实论文是否已被正式接收",
+      "recommendation": "核实论文状态，必要时更新为 arXiv 引用",
+      "status": "open"
+    },
+    {
+      "id": "P1-008",
+      "severity": "P1",
+      "category": "逻辑/量化指标",
+      "location": "sections/02-goals-framework-challenges.tex:7",
+      "evidence": "区域级退化识别准确率显著提升",
+      "description": ""显著提升"未量化",
+      "recommendation": "明确阈值，如"准确率提升≥10%"",
+      "status": "open"
+    },
+    {
+      "id": "P1-009",
+      "severity": "P1",
+      "category": "逻辑/量化指标",
+      "location": "sections/03-methodology.tex:257",
+      "evidence": "关键指标优于全图级识别基线",
+      "description": ""优于"未给出具体提升幅度",
+      "recommendation": "明确量化阈值",
+      "status": "open"
+    },
+    {
+      "id": "P1-010",
+      "severity": "P1",
+      "category": "逻辑/量化指标",
+      "location": "sections/03-methodology.tex:257",
+      "evidence": "空间退化图质量评分达到预设阈值",
+      "description": "未说明评分方法与目标值",
+      "recommendation": "说明评分方法与目标值",
+      "status": "open"
+    },
+    {
+      "id": "P1-011",
+      "severity": "P1",
+      "category": "结构/预期成果",
+      "location": "sections/05-expected-outcomes.tex",
+      "evidence": "237 字，缺少使用去向和效益量化",
+      "description": "预期成果章节不完整",
+      "recommendation": "补充成果应用转化路径和预期社会效益",
+      "status": "open"
+    },
+    {
+      "id": "P1-012",
+      "severity": "P1",
+      "category": "术语/一致性",
+      "location": "多处",
+      "evidence": "空间退化图$\\mathcal{M}$ vs 空间退化图M",
+      "description": "概念表述不一致",
+      "recommendation": "统一使用$\\mathcal{M}$",
+      "status": "open"
+    },
+    {
+      "id": "P2-001",
+      "severity": "P2",
+      "category": "术语/缩略语展开",
+      "location": "sections/01-topic-basis.tex:56",
+      "evidence": "在感知质量评估指标（LPIPS、SSIM等）",
+      "description": "SSIM 首次使用未展开（可选）",
+      "recommendation": "补充"结构相似性指数（SSIM）"",
+      "status": "open"
+    },
+    {
+      "id": "P2-002",
+      "severity": "P2",
+      "category": "术语/缩略语展开",
+      "location": "sections/01-topic-basis.tex:9",
+      "evidence": "LPIPS感知质量指标",
+      "description": "LPIPS 首次使用未展开（可选）",
+      "recommendation": "补充"学习感知图像块相似度（LPIPS）"",
+      "status": "open"
+    },
+    {
+      "id": "P2-003",
+      "severity": "P2",
+      "category": "术语/缩略语展开",
+      "location": "sections/01-topic-basis.tex:40",
+      "evidence": "结合CNN局部纹理提取能力",
+      "description": "CNN 首次使用未展开（可选）",
+      "recommendation": "补充"卷积神经网络（CNN）"",
+      "status": "open"
+    },
+    {
+      "id": "P2-004",
+      "severity": "P2",
+      "category": "文风/AI味",
+      "location": "sections/01-topic-basis.tex:13",
+      "evidence": "本项目的研究意义可归纳为三个层面",
+      "description": "模板化表述",
+      "recommendation": "改为直接陈述",
+      "status": "open"
+    },
+    {
+      "id": "P2-005",
+      "severity": "P2",
+      "category": "文风/AI味",
+      "location": "sections/04-innovation.tex:3",
+      "evidence": "本项目创新点按'理论创新—方法创新—技术创新'组织如下",
+      "description": "模板化结构预告",
+      "recommendation": "删除引导句，直接陈述创新点",
+      "status": "open"
+    },
+    {
+      "id": "P2-006",
+      "severity": "P2",
+      "category": "术语/一致性",
+      "location": "多处",
+      "evidence": "Transformer vs transformer",
+      "description": "大小写不一致",
+      "recommendation": "统一首字母大写",
+      "status": "open"
+    },
+    {
+      "id": "P2-007",
+      "severity": "P2",
+      "category": "引用/未使用条目",
+      "location": "refs.bib",
+      "evidence": "zhu2024agentic",
+      "description": "bib 条目存在但未被引用",
+      "recommendation": "疑似 agenticir 的 arXiv 版本，建议清理",
+      "status": "open"
+    },
+    {
+      "id": "P2-008",
+      "severity": "P2",
+      "category": "逻辑/风险应对",
+      "location": "sections/02-goals-framework-challenges.tex:111",
+      "evidence": "设置区域置信度门控",
+      "description": "$\\tau_{\\text{seg}}$ 未给出具体取值",
+      "recommendation": "补充阈值确定方法",
+      "status": "open"
+    },
+    {
+      "id": "P2-009",
+      "severity": "P2",
+      "category": "逻辑/风险应对",
+      "location": "sections/02-goals-framework-challenges.tex:115",
+      "evidence": "性能降级阈值$\\delta$",
+      "description": "$\\delta$ 未给出参考取值",
+      "recommendation": "补充参考取值",
+      "status": "open"
+    }
+  ]
+}
+</invoke>

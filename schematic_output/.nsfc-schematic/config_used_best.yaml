@@ -1,0 +1,195 @@
+skill_info:
+  name: nsfc-schematic
+  version: 0.8.6
+  description: 为 NSFC 标书生成原理图/机制图（drawio + SVG/PNG，可选 PDF）
+  author: Bensz Conan
+  category: 科研写作
+renderer:
+  canvas:
+    width_px: 1326
+    height_px: 1717
+  drawio_border_px: 20
+  background: '#FFFFFF'
+  allow_internal_fallback: true
+  internal_routing: orthogonal
+  drawio:
+    auto_install_macos: false
+    install_method_macos: brew
+  png:
+    enabled: true
+  svg:
+    enabled: true
+  pdf:
+    enabled: true
+  stroke:
+    width_px: 2
+  fonts:
+    candidates:
+    - /System/Library/Fonts/STHeiti Medium.ttc
+    - /System/Library/Fonts/STHeiti Light.ttc
+    - /System/Library/Fonts/Supplemental/Songti.ttc
+    - /System/Library/Fonts/Supplemental/Arial Unicode.ttf
+    - /usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc
+    - /usr/share/fonts/truetype/arphic/ukai.ttc
+    - /usr/share/fonts/truetype/arphic/uming.ttc
+    - C:/Windows/Fonts/msyh.ttc
+    - C:/Windows/Fonts/simsun.ttc
+layout:
+  direction: top-to-bottom
+  template_ref: null
+  auto_expand_canvas: true
+  title:
+    enabled: true
+    padding_y: 18
+  node_default_size:
+    w: 280
+    h: 96
+  text_fit:
+    enabled: true
+    max_lines: 3
+    padding_x: 18
+    padding_y: 14
+    line_spacing_px: 4
+    max_node_w: 520
+    max_node_h_soft: 260
+    widen_step_px: 20
+  font:
+    title_size: 34
+    group_label_size: 22
+    node_label_size: 26
+    node_label_size_target: 28
+    edge_label_size: 22
+  canvas_fit:
+    enabled: true
+    shrink_to_content: true
+    shrink_trigger_ratio: 1.15
+  routing:
+    obstacle_padding_px: 16
+    avoid_group_headers: true
+  auto:
+    margin_x: 105
+    margin_y: 117
+    group_gap_x: 133
+    group_gap_y: 80
+    group_padding_x: 36
+    group_padding_y: 28
+    group_header_h: 56
+    group_min_w: 680
+    group_min_h: 260
+    node_gap_x: 42
+    node_gap_y: 31
+    max_cols: 3
+color_scheme:
+  file: assets/color_schemes.yaml
+  name: academic-blue
+evaluation:
+  evaluation_mode: heuristic
+  max_rounds: 5
+  multi_round_self_check:
+    enabled: true
+    critique_dimensions:
+    - structure
+    - visual
+    - readability
+    max_workers: 3
+    penalty:
+      p0: 10
+      p1: 4
+      p2: 1
+      max_total: 40
+  thresholds:
+    min_font_px: 20
+    warn_font_px: 24
+    min_edge_font_px: 20
+    warn_edge_font_px: 24
+    node_margin_warn_px: 20
+    balance_warn_ratio: 0.4
+    edge_node_min_dist_px: 14
+    edge_long_diag_warn_ratio: 0.35
+    edge_diagness_warn: 0.35
+    blank_check_min_nodes: 6
+    blank_density_p0: 0.01
+    blank_density_p1: 0.02
+    wcag_contrast_p0: 3.0
+    wcag_contrast_p1: 4.5
+    crowded_density_p1: 0.35
+    crowded_density_p0: 0.45
+    print_scale_check: true
+    print_scale_ratio: 0.5
+    print_scale_min_font: 10
+  early_stop:
+    enabled: false
+    min_rounds: 2
+    consecutive_pass: 2
+    allow_p1: 1
+    score_threshold: 85
+  stop_strategy: plateau
+  plateau:
+    min_explore_rounds: 4
+    same_image_rounds: 2
+    no_improve_rounds: 3
+    min_delta: 1
+  weights:
+    heuristic: 0.7
+    visual: 0.3
+  exploration:
+    enabled: true
+    candidates_per_round: 2
+    seed: 1337
+    jitter_px:
+      margin_x: 18
+      margin_y: 18
+      node_gap_x: 10
+      node_gap_y: 8
+      group_gap_x: 14
+      group_gap_y: 10
+    max_cols_options:
+    - 2
+    - 3
+output:
+  dirname: schematic_output
+  hide_intermediate: true
+  intermediate_dir: .nsfc-schematic
+  max_history_runs: 10
+  report_filename: optimization_report.md
+  artifacts:
+    drawio: schematic.drawio
+    svg: schematic.svg
+    png: schematic.png
+    pdf: schematic.pdf
+    spec: spec.yaml
+    spec_latest: spec_latest.yaml
+    report: optimization_report.md
+    config_best: config_used_best.yaml
+    evaluation_best: evaluation_best.json
+planning:
+  planning_mode: ai
+  models_file: references/models/templates.yaml
+  output:
+    plan_filename: PLAN.md
+    spec_filename: spec_draft.yaml
+  extraction:
+    max_terms: 12
+    ai_tex_max_chars: 20000
+  defaults:
+    title: NSFC 原理图（规划草案）
+    direction: top-to-bottom
+    color_scheme: academic-blue
+    groups:
+    - id: input
+      label: 输入层
+      style: dashed-border
+    - id: process
+      label: 处理层
+      style: solid-border
+    - id: output
+      label: 输出层
+      style: background-fill
+  checks:
+    groups_min: 2
+    groups_max: 5
+    nodes_per_group_min: 1
+    nodes_per_group_max: 6
+    total_nodes_max: 20
+    edge_density_max_ratio: 1.5
+    require_input_output: true

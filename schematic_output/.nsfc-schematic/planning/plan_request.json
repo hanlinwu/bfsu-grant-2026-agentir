@@ -1,0 +1,39 @@
+{
+  "source": {
+    "label": "context",
+    "proposal": null
+  },
+  "extracted_terms": [
+    "多智能体协同的空间感知图像恢复方法"
+  ],
+  "combined_text_excerpt": "多智能体协同的空间感知图像恢复方法",
+  "model_gallery": {
+    "models_dir": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/schematic_output/.nsfc-schematic/planning/models",
+    "models_index": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/schematic_output/.nsfc-schematic/planning/models_index.yaml",
+    "contact_sheet": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/schematic_output/.nsfc-schematic/planning/models_contact_sheet.png",
+    "contact_sheet_simple": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/schematic_output/.nsfc-schematic/planning/models_simple_contact_sheet.png"
+  },
+  "constraints": {
+    "groups_min": 2,
+    "groups_max": 5,
+    "nodes_per_group_min": 1,
+    "nodes_per_group_max": 6,
+    "total_nodes_max": 20,
+    "edge_density_max_ratio": 1.5,
+    "require_input_output": true,
+    "id_rules": "group/node id 必须匹配 ^[A-Za-z_][A-Za-z0-9_-]{0,63}$（ASCII；以字母/下划线开头；长度<=64）",
+    "template_policy": {
+      "use_template_ref": false,
+      "note": "纯 AI 规划：模型画廊仅用于学习，不要求也不建议从模板库中单选一个模板。"
+    }
+  },
+  "references": {
+    "spec_example": "/home/panda/.claude/skills/nsfc-schematic/references/spec_examples/ccs_framework.yaml",
+    "spec_parser": "/home/panda/.claude/skills/nsfc-schematic/scripts/spec_parser.py"
+  },
+  "output": {
+    "write_plan_to": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/schematic_output/PLAN.md",
+    "write_spec_to": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026/schematic_output/spec_draft.yaml",
+    "optional_write_workspace_plan_to": "/home/panda/.claude/skills/nsfc-schematic/schematic-plan.md"
+  }
+}

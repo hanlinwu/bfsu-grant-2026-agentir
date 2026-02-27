@@ -1,0 +1,126 @@
+{
+  "score": 48,
+  "heuristic_score": 42,
+  "visual_score": 85,
+  "metrics": {
+    "routing_mode": "orthogonal",
+    "png_size": {
+      "w": 1326,
+      "h": 1717
+    },
+    "edge": {
+      "edge_count": 17,
+      "length_avg": 519.7058823529412,
+      "length_max": 1286.0,
+      "diagness_avg": 0.0,
+      "long_diagonal_edges": 0,
+      "edge_node_intersections": 2,
+      "edge_node_too_close": 2
+    },
+    "text": {
+      "crowded_nodes": 0
+    }
+  },
+  "counts": {
+    "nodes": 14,
+    "groups": 5,
+    "edges": 17,
+    "overflow": 0,
+    "near_margin": 0,
+    "edge_crossings": 3,
+    "p0": 1,
+    "p1": 4,
+    "p2": 2
+  },
+  "defects": [
+    {
+      "severity": "P1",
+      "where": "global",
+      "message": "连线标签字号偏小：22px < 建议值 24px",
+      "dimension": "text_readability"
+    },
+    {
+      "severity": "P0",
+      "where": "node:four_heads|restored_img",
+      "message": "节点重叠比例过高：100.0%",
+      "dimension": "node_overlap"
+    },
+    {
+      "severity": "P1",
+      "where": "edge:degradation_map->trajectory_collect",
+      "message": "连线可能穿越节点 global_scheduler（建议调整节点排列/对齐，减少穿越）",
+      "dimension": "edge_node_intersection"
+    },
+    {
+      "severity": "P2",
+      "where": "edge:trajectory_collect->distillation",
+      "message": "连线可能贴近节点 restored_img（最小距离≈3.0px），缩印可读性可能受影响",
+      "dimension": "edge_node_proximity"
+    },
+    {
+      "severity": "P2",
+      "where": "edge:distillation->routing_network",
+      "message": "连线可能贴近节点 restored_img（最小距离≈3.0px），缩印可读性可能受影响",
+      "dimension": "edge_node_proximity"
+    },
+    {
+      "severity": "P1",
+      "where": "edge:routing_network->four_heads",
+      "message": "连线可能穿越节点 restored_img（建议调整节点排列/对齐，减少穿越）",
+      "dimension": "edge_node_intersection"
+    },
+    {
+      "severity": "P1",
+      "where": "global",
+      "message": "连线交叉：3 处（routing=orthogonal）",
+      "dimension": "edge_crossings"
+    }
+  ],
+  "canvas": {
+    "width": 1326,
+    "height": 1717
+  },
+  "font": {
+    "node_label_size": 26,
+    "edge_label_size": 22,
+    "min_required": 20,
+    "min_required_node": 20,
+    "min_required_edge": 20
+  },
+  "evaluation_mode_requested": "heuristic",
+  "evaluation_source": "heuristic",
+  "score_base": 55,
+  "score_penalty": 7,
+  "score_total": 48,
+  "critique_files": {
+    "structure": "critique_structure.json",
+    "visual": "critique_visual.json",
+    "readability": "critique_readability.json"
+  },
+  "critique_summary": {
+    "weights": {
+      "p0": 10,
+      "p1": 4,
+      "p2": 1,
+      "max_total": 40
+    },
+    "counts": {
+      "p0": 0,
+      "p1": 1,
+      "p2": 3,
+      "defects_total": 4
+    },
+    "per_dimension": {
+      "visual": {
+        "P0": 0,
+        "P1": 0,
+        "P2": 3
+      },
+      "readability": {
+        "P0": 0,
+        "P1": 1,
+        "P2": 0
+      }
+    }
+  }
+}

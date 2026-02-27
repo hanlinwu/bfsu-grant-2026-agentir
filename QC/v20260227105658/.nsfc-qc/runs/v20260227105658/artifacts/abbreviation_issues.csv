@@ -1,0 +1,8 @@
+=== 缩略语首次使用检查 ===
+file,abbrev,context
+sections/01-topic-basis.tex,SAM,"在图像空间分解方面，Kirillov等人\cite{sam}提出的SAM（Segment Anything Model）以超"
+sections/01-topic-basis.tex,VLM,"基于智能体的方法代表着图像恢复领域的新兴范式，将恢复过程重新定义为�"
+sections/01-topic-basis.tex,LLM,"基于智能体的方法代表着图像恢复领域的新兴范式，将恢复过程重新定义为�"
+sections/01-topic-basis.tex,PSNR,"标准自注意力机制的计算复杂度与图像像素数量的平方成正比，对高分辨率�"
+sections/01-topic-basis.tex,LPIPS,"扩散概率模型通过迭代去噪过程建模复杂数据分布，为图像恢复提供了强大�"
+sections/01-topic-basis.tex,AiO,"图像恢复领域近十年经历了从卷积神经网络到Transformer、从单任务专用模型�"

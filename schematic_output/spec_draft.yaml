@@ -1,0 +1,148 @@
+schematic:
+  title: "多智能体协同的空间感知图像恢复框架"
+  canvas:
+    width: 2400
+    height: 1600
+  direction: top-to-bottom
+  groups:
+    - id: input_group
+      label: "输入"
+      style: dashed-border
+      children:
+        - id: degraded_img
+          label: "退化图像 y\n(含噪声/模糊/雾霾/雨线)"
+          kind: primary
+
+    - id: perception_group
+      label: "空间感知模块"
+      style: solid-border
+      children:
+        - id: sam_seg
+          label: "SAM/RobustSAM\n语义区域分割"
+          kind: secondary
+        - id: vlm_analysis
+          label: "VLM退化分析\n(DepictQA/Q-Instruct)"
+          kind: secondary
+        - id: degradation_map
+          label: "空间退化图 M\n{(R_i, d_i, s_i)}"
+          kind: critical
+
+    - id: planning_group
+      label: "层级规划模块"
+      style: solid-border
+      children:
+        - id: global_scheduler
+          label: "全局调度器 (LLM)\n退化先验排序策略"
+          kind: critical
+        - id: region_experts
+          label: "区域专家\n(多智能体协同)"
+          kind: critical
+        - id: tool_library
+          label: "工具库\n(去噪/去模糊/去雾/去雨/SR)"
+          kind: secondary
+        - id: region_restore
+          label: "区域恢复 + 质量反馈\n(迭代优化)"
+          kind: critical
+        - id: mask_fusion
+          label: "掩码融合"
+          kind: secondary
+
+    - id: deployment_group
+      label: "轻量部署模块 (轨迹蒸馏)"
+      style: solid-border
+      children:
+        - id: trajectory_collect
+          label: "轨迹收集 (离线)"
+          kind: secondary
+        - id: distillation
+          label: "轨迹蒸馏"
+          kind: critical
+        - id: routing_network
+          label: "轻量路由网络 Φ_ω"
+          kind: critical
+        - id: four_heads
+          label: "四分支输出\n(掩码/类型/工具/参数)"
+          kind: secondary
+
+    - id: output_group
+      label: "输出"
+      style: dashed-border
+      children:
+        - id: restored_img
+          label: "恢复图像 x̂"
+          kind: primary
+
+  edges:
+    # 主流程：输入 → 空间感知
+    - from: degraded_img
+      to: sam_seg
+      style: solid
+    - from: sam_seg
+      to: vlm_analysis
+      style: solid
+    - from: vlm_analysis
+      to: degradation_map
+      style: solid
+
+    # 主流程：空间感知 → 层级规划
+    - from: degradation_map
+      to: global_scheduler
+      style: solid
+    - from: global_scheduler
+      to: region_experts
+      style: solid
+    - from: region_experts
+      to: tool_library
+      style: dashed
+      label: "工具选择"
+    - from: region_experts
+      to: region_restore
+      style: solid
+    - from: tool_library
+      to: region_restore
+      style: dashed
+      label: "执行"
+    - from: region_restore
+      to: mask_fusion
+      style: solid
+
+    # 反馈闭环
+    - from: region_restore
+      to: region_experts
+      style: dashed
+      label: "反馈"
+
+    # 主流程：层级规划 → 输出（训练阶段）
+    - from: mask_fusion
+      to: restored_img
+      style: solid
+      label: "训练"
+
+    # 支路：空间感知 → 轨迹收集（离线数据）
+    - from: degradation_map
+      to: trajectory_collect
+      style: dashed
+      label: "离线数据"
+
+    # 支路：层级规划 → 轨迹收集
+    - from: region_restore
+      to: trajectory_collect
+      style: dashed
+      label: "决策轨迹"
+
+    # 轻量部署流程
+    - from: trajectory_collect
+      to: distillation
+      style: solid
+    - from: distillation
+      to: routing_network
+      style: solid
+    - from: routing_network
+      to: four_heads
+      style: solid
+
+    # 轻量部署 → 输出（部署阶段）
+    - from: four_heads
+      to: restored_img
+      style: dashed
+      label: "推理"

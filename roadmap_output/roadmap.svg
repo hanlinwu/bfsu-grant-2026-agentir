@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="2263" viewBox="0 0 2400 2263">
+<rect x="0" y="0" width="2400" height="2263" fill="#FFFFFF"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L6,3 z" fill="#2F5597"/></marker></defs>
+<rect x="80" y="80" width="2240" height="119" rx="18" ry="18" fill="#FFFFFF" stroke="#2F75B5" stroke-width="4"/>
+<rect x="80" y="80" width="2240" height="36" rx="18" ry="18" fill="#2F75B5" stroke="#2F75B5" stroke-width="4"/>
+<text x="96" y="100" font-size="29" fill="#FFFFFF" font-family="sans-serif">输入层</text>
+<rect x="685" y="136" width="1030" height="120" rx="18" ry="18" fill="#F2F2F2" stroke="#666666" stroke-width="4"/>
+<rect x="80" y="219" width="2240" height="595" rx="18" ry="18" fill="#FFFFFF" stroke="#2F75B5" stroke-width="4"/>
+<rect x="80" y="219" width="2240" height="45" rx="18" ry="18" fill="#2F75B5" stroke="#2F75B5" stroke-width="4"/>
+<text x="96" y="248" font-size="29" fill="#FFFFFF" font-family="sans-serif">空间感知退化分析</text>
+<rect x="685" y="284" width="1030" height="120" rx="18" ry="18" fill="#E8DFF2" stroke="#6A4C93" stroke-width="4"/>
+<rect x="80" y="284" width="585" height="530" rx="18" ry="18" fill="#DAF2D0" stroke="#2E7D32" stroke-width="4"/>
+<rect x="1735" y="284" width="585" height="163" rx="18" ry="18" fill="#D9E8FF" stroke="#2F5597" stroke-width="4"/>
+<rect x="1735" y="467" width="585" height="163" rx="18" ry="18" fill="#D9E8FF" stroke="#2F5597" stroke-width="4"/>
+<rect x="1735" y="650" width="585" height="163" rx="18" ry="18" fill="#F8D7DA" stroke="#B23A48" stroke-width="4"/>
+<rect x="80" y="834" width="2240" height="595" rx="18" ry="18" fill="#FFFFFF" stroke="#2F75B5" stroke-width="4"/>
+<rect x="80" y="834" width="2240" height="45" rx="18" ry="18" fill="#2F75B5" stroke="#2F75B5" stroke-width="4"/>
+<text x="96" y="863" font-size="29" fill="#FFFFFF" font-family="sans-serif">层级多智能体协同规划</text>
+<rect x="685" y="899" width="1030" height="120" rx="18" ry="18" fill="#FFF2CC" stroke="#B07D00" stroke-width="4"/>
+<rect x="80" y="899" width="585" height="255" rx="18" ry="18" fill="#DAF2D0" stroke="#2E7D32" stroke-width="4"/>
+<rect x="80" y="1174" width="585" height="255" rx="18" ry="18" fill="#DAF2D0" stroke="#2E7D32" stroke-width="4"/>
+<rect x="1735" y="899" width="585" height="255" rx="18" ry="18" fill="#FFF2CC" stroke="#B07D00" stroke-width="4"/>
+<rect x="1735" y="1174" width="585" height="255" rx="18" ry="18" fill="#D9E8FF" stroke="#2F5597" stroke-width="4"/>
+<rect x="80" y="1449" width="2240" height="476" rx="18" ry="18" fill="#FFFFFF" stroke="#2F75B5" stroke-width="4"/>
+<rect x="80" y="1449" width="2240" height="45" rx="18" ry="18" fill="#2F75B5" stroke="#2F75B5" stroke-width="4"/>
+<text x="96" y="1478" font-size="29" fill="#FFFFFF" font-family="sans-serif">轨迹蒸馏与轻量部署</text>
+<rect x="685" y="1514" width="1030" height="120" rx="18" ry="18" fill="#E8DFF2" stroke="#6A4C93" stroke-width="4"/>
+<rect x="1735" y="1514" width="585" height="123" rx="18" ry="18" fill="#D9E8FF" stroke="#2F5597" stroke-width="4"/>
+<rect x="1735" y="1657" width="585" height="123" rx="18" ry="18" fill="#F8D7DA" stroke="#B23A48" stroke-width="4"/>
+<rect x="1735" y="1800" width="585" height="123" rx="18" ry="18" fill="#E8DFF2" stroke="#6A4C93" stroke-width="4"/>
+<rect x="80" y="1945" width="2240" height="238" rx="18" ry="18" fill="#FFFFFF" stroke="#2F75B5" stroke-width="4"/>
+<rect x="80" y="1945" width="2240" height="45" rx="18" ry="18" fill="#2F75B5" stroke="#2F75B5" stroke-width="4"/>
+<text x="96" y="1974" font-size="29" fill="#FFFFFF" font-family="sans-serif">输出层</text>
+<rect x="685" y="2010" width="1030" height="120" rx="18" ry="18" fill="#F2F2F2" stroke="#666666" stroke-width="4"/>
+<rect x="80" y="2010" width="585" height="173" rx="18" ry="18" fill="#F2F2F2" stroke="#666666" stroke-width="4"/>
+<line x1="1200" y1="195" x2="1200" y2="223" stroke="#2F5597" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1200" y1="810" x2="1200" y2="838" stroke="#2F5597" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1200" y1="1425" x2="1200" y2="1453" stroke="#2F5597" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1200" y1="1921" x2="1200" y2="1949" stroke="#2F5597" stroke-width="4" marker-end="url(#arrow)"/>
+</svg>

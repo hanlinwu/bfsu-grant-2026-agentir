@@ -1,0 +1,180 @@
+title: 多智能体协同的空间感知图像恢复技术路线
+
+layout_template: layered-pipeline
+direction: top-to-bottom
+
+phases:
+  - id: phase_input
+    name: 输入层
+    position: top
+    nodes:
+      - id: input_image
+        label: 复杂退化图像输入\n（噪声/模糊/雾霾/雨线/压缩伪影）
+        kind: auxiliary
+
+  - id: phase_perception
+    name: 空间感知退化分析
+    position: middle
+    nodes:
+      - id: sam_segment
+        label: SAM 语义分割\n零样本区域划分 {R_i}
+        kind: primary
+
+      - id: vlm_analysis
+        label: VLM 退化分析\n区域级退化识别 (d_i, s_i)
+        kind: primary
+
+      - id: context_agg
+        label: 空间上下文聚合\n图注意力邻域修正
+        kind: secondary
+
+      - id: deg_map
+        label: 空间退化图 M\n{(R_i, d_i, s_i, h_i)}
+        kind: critical
+
+      - id: robust_fallback
+        label: 备选：RobustSAM\n退化稳健分割回退
+        kind: risk
+
+  - id: phase_decision
+    name: 层级多智能体协同规划
+    position: middle
+    nodes:
+      - id: global_scheduler
+        label: 全局调度器\n退化先验排序：场景→成像→压缩
+        kind: decision
+
+      - id: region_expert
+        label: 区域专家组\n工具链选择 + 参数初始化
+        kind: secondary
+
+      - id: param_opt
+        label: 连续参数优化\n贝叶斯优化/梯度上升迭代
+        kind: secondary
+
+      - id: quality_feedback
+        label: 质量反馈闭环\nDepictQA 评估 + 迭代修正
+        kind: decision
+
+      - id: mask_fusion
+        label: 掩码加权融合\n边界一致性约束
+        kind: primary
+
+  - id: phase_deployment
+    name: 轨迹蒸馏与轻量部署
+    position: middle
+    nodes:
+      - id: traj_collect
+        label: 离线轨迹收集\n决策数据集 T (|T|≥10K)
+        kind: critical
+
+      - id: multi_task_distill
+        label: 多任务联合蒸馏\n分割 + 分类 + 路由 + 参数
+        kind: primary
+
+      - id: hard_mining
+        label: 困难样本再训练\n性能差距聚焦优化
+        kind: risk
+
+      - id: light_router
+        label: 轻量路由网络 Φ_ω\n端到端实时推理
+        kind: critical
+
+  - id: phase_output
+    name: 输出层
+    position: bottom
+    nodes:
+      - id: output_image
+        label: 高质量恢复图像\n区域差异化精细恢复
+        kind: auxiliary
+
+      - id: deliverables
+        label: 成果产出\n论文2-4篇 / 专利1项
+        kind: auxiliary
+
+connections:
+  # 纵向主链（感知层）
+  - from: input_image
+    to: sam_segment
+    style: solid
+
+  - from: sam_segment
+    to: vlm_analysis
+    style: solid
+
+  - from: vlm_analysis
+    to: context_agg
+    style: solid
+
+  - from: context_agg
+    to: deg_map
+    style: solid
+
+  # 纵向主链（决策层）
+  - from: deg_map
+    to: global_scheduler
+    style: solid
+
+  - from: global_scheduler
+    to: region_expert
+    style: solid
+
+  - from: region_expert
+    to: param_opt
+    style: solid
+
+  - from: param_opt
+    to: quality_feedback
+    style: solid
+
+  - from: quality_feedback
+    to: mask_fusion
+    style: solid
+    label: Q ≥ τ
+
+  - from: quality_feedback
+    to: param_opt
+    style: dashed
+    label: Q < τ（迭代）
+
+  # 纵向主链（部署层）
+  - from: mask_fusion
+    to: traj_collect
+    style: dashed
+    label: 离线运行
+
+  - from: traj_collect
+    to: multi_task_distill
+    style: solid
+
+  - from: multi_task_distill
+    to: light_router
+    style: solid
+
+  # 输出
+  - from: light_router
+    to: output_image
+    style: solid
+
+  - from: output_image
+    to: deliverables
+    style: solid
+
+  # 备选方案连接
+  - from: sam_segment
+    to: robust_fallback
+    style: dashed
+    label: 置信度 < τ_seg
+
+annotations:
+  - text: 研究内容1：感知
+    position: left
+    anchor: phase_perception
+
+  - text: 研究内容2：决策
+    position: left
+    anchor: phase_decision
+
+  - text: 研究内容3：部署
+    position: left
+    anchor: phase_deployment

@@ -1,0 +1,59 @@
+{
+  "run_id": "v20260227105658",
+  "project_root": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026",
+  "main_tex": "main.tex",
+  "timestamp": "2026-02-27T10:56:58",
+  "citations": {
+    "total_used": 38,
+    "total_bib_entries": 39,
+    "missing": [],
+    "unused": ["zhu2024agentic"]
+  },
+  "lengths": {
+    "main_tex": {"chars": 4710, "words": 249, "lines": 189},
+    "sections": {
+      "01-topic-basis.tex": {"chars": 9900, "cn_chars_approx": 6847, "lines": 114},
+      "02-goals-framework-challenges.tex": {"chars": 4654, "cn_chars_approx": 2147, "lines": 117},
+      "03-methodology.tex": {"chars": 13100, "cn_chars_approx": 2661, "lines": 291},
+      "04-innovation.tex": {"chars": 1176, "cn_chars_approx": 831, "lines": 17},
+      "05-expected-outcomes.tex": {"chars": 339, "cn_chars_approx": 237, "lines": 16},
+      "06-references.tex": {"chars": 84, "lines": 5},
+      "07-leader-research-achievements.tex": {"chars": 966, "cn_chars_approx": 617, "lines": 31},
+      "08-leader-project-experience.tex": {"chars": 536, "cn_chars_approx": 307, "lines": 19},
+      "09-preparation-work.tex": {"chars": 876, "cn_chars_approx": 638, "lines": 32},
+      "10-relationship-and-difference.tex": {"chars": 524, "cn_chars_approx": 412, "lines": 18}
+    },
+    "total_section_chars": 32155,
+    "total_cn_chars_approx": 14800
+  },
+  "sections_summary": {
+    "项目设计论证": {
+      "01-选题依据": "~6847字",
+      "02-研究目标与框架": "~2147字",
+      "03-思路方法": "~2661字",
+      "04-创新之处": "~831字",
+      "05-预期成果": "~237字",
+      "06-参考文献": "自动输出"
+    },
+    "前期研究基础": {
+      "07-研究成果": "~617字",
+      "08-项目经历": "~307字",
+      "09-准备工作": "~638字",
+      "10-联系与区别": "~412字"
+    }
+  },
+  "p0_findings": [],
+  "p1_findings": [
+    {
+      "type": "unused_reference",
+      "bibkey": "zhu2024agentic",
+      "note": "bib entry exists but not cited in text"
+    }
+  ],
+  "structure_check": {
+    "required_sections_present": true,
+    "section_count": 10,
+    "biblatex_used": true,
+    "gb7714_style": true
+  }
+}

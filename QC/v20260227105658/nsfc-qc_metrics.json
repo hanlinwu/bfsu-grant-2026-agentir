@@ -1,0 +1,69 @@
+{
+  "run_id": "v20260227105658",
+  "timestamp": "2026-02-27T10:56:58",
+  "project_root": "/mnt/c/Users/Hanlin Wu/OneDrive/1-科研工作/98-基金项目申请/校级项目2026",
+  "main_tex": "main.tex",
+  "threads": 5,
+  "execution_mode": "serial",
+  "lengths": {
+    "project_design": {
+      "requirement_chars": 6000,
+      "actual_chars": 12723,
+      "overage_percent": 94.7,
+      "sections": {
+        "01-topic-basis": {"chars": 6847, "cn_chars_approx": 6847, "overage": 4747},
+        "02-goals-framework": {"chars": 2147, "cn_chars_approx": 2147, "overage": 647},
+        "03-methodology": {"chars": 2661, "cn_chars_approx": 2661, "overage": 561},
+        "04-innovation": {"chars": 831, "cn_chars_approx": 831, "overage": 31},
+        "05-expected-outcomes": {"chars": 237, "cn_chars_approx": 237, "overage": -63},
+        "06-references": {"chars": 0, "auto_generated": true}
+      }
+    },
+    "research_foundation": {
+      "requirement_chars": 1000,
+      "actual_chars": 1974,
+      "overage_percent": 97.4,
+      "sections": {
+        "07-leader-achievements": {"chars": 617, "cn_chars_approx": 617},
+        "08-leader-projects": {"chars": 307, "cn_chars_approx": 307},
+        "09-preparation": {"chars": 638, "cn_chars_approx": 638},
+        "10-relationship": {"chars": 412, "cn_chars_approx": 412}
+      }
+    }
+  },
+  "citations": {
+    "total_used": 38,
+    "total_bib_entries": 39,
+    "missing_count": 0,
+    "unused_entries": ["zhu2024agentic"],
+    "by_type": {
+      "top_conference": {"count": 16, "percent": 42},
+      "ieee_journal": {"count": 10, "percent": 26},
+      "arxiv_preprint": {"count": 8, "percent": 21},
+      "other": {"count": 4, "percent": 11}
+    },
+    "by_year": {
+      "2020": 1,
+      "2021": 1,
+      "2022": 7,
+      "2023": 5,
+      "2024": 8,
+      "2025": 16
+    }
+  },
+  "findings_summary": {
+    "p0_count": 4,
+    "p1_count": 12,
+    "p2_count": 15,
+    "total": 31
+  },
+  "structure_check": {
+    "required_sections_present": true,
+    "section_count": 10,
+    "biblatex_used": true,
+    "gb7714_style": true,
+    "formula_count": 21,
+    "figure_count": 3,
+    "table_count": 0
+  }
+}
