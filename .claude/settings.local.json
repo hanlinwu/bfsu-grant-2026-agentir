@@ -62,7 +62,19 @@
       "Bash(git push -u origin master)",
       "Bash(git remote set-url origin git@github.com:hanlinwu/bfsu-grant-2026-agentir.git)",
       "Bash(git add -A)",
-      "Bash(git push origin master)"
+      "Bash(git push origin master)",
+      "Bash(fc-list :lang=zh family)",
+      "Bash(fc-list \"Songti SC\" style)",
+      "Bash(xelatex -interaction=nonstopmode -shell-escape main.tex)",
+      "Bash(latexmk -xelatex main.tex)",
+      "Bash(latexmk -C)",
+      "Bash(xelatex -shell-escape -interaction=nonstopmode -synctex=1 main.tex)",
+      "Bash(xelatex -shell-escape -interaction=nonstopmode main.tex)",
+      "Bash(ls /Users/hlwu/Documents/bfsu-grant-2026-agentir/imgs/research-framework*)",
+      "Bash(brew list --cask)",
+      "Bash(brew install --cask drawio)",
+      "Bash(/opt/homebrew/bin/drawio --export --format pdf --output /Users/hlwu/Documents/bfsu-grant-2026-agentir/imgs/research-framework.pdf /Users/hlwu/Documents/bfsu-grant-2026-agentir/imgs/research-framework.drawio)",
+      "Bash(/opt/homebrew/bin/drawio --export --format pdf --crop --output \"/Users/hlwu/Documents/bfsu-grant-2026-agentir/imgs/research-framework.pdf\" \"/Users/hlwu/Documents/bfsu-grant-2026-agentir/imgs/research-framework.drawio\")"
     ]
   }
 }

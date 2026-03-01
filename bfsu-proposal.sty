@@ -4,9 +4,18 @@
 % ===== 中文与字体 =====
 \RequirePackage[UTF8, fontset=none]{ctex}
 \xeCJKsetup{PunctStyle=quanjiao,RubberPunctSkip=true}
-\setCJKmainfont[BoldFont=SimSun, BoldFeatures={FakeBold=2}, ItalicFont=KaiTi]{SimSun}
-\setCJKsansfont{SimHei}
-\setCJKmonofont{FangSong}
+% 通过检测字体是否存在自动适配 macOS / Windows，无需 -shell-escape
+\IfFontExistsTF{Songti SC}{
+  % macOS 字体
+  \setCJKmainfont[BoldFont=Songti SC Bold, ItalicFont=Kaiti SC]{Songti SC}
+  \setCJKsansfont{Heiti SC}
+  \setCJKmonofont{STFangsong}
+}{
+  % Windows 字体
+  \setCJKmainfont[BoldFont=SimSun, BoldFeatures={FakeBold=2}, ItalicFont=KaiTi]{SimSun}
+  \setCJKsansfont{SimHei}
+  \setCJKmonofont{FangSong}
+}
 \setmainfont{Times New Roman}
 
 % ===== 页面与常用宏包 =====
